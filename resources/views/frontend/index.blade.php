@@ -14,7 +14,7 @@
                     $featured_categories = \App\Category::where('featured', 1)->get();
                 @endphp
 
-                <div class="@if($num_todays_deal > 0) col-lg-7 @else col-lg-9 @endif">
+                <div style="overflow: hidden" class="@if($num_todays_deal > 0) col-lg-7 @else col-lg-9 @endif">
                     @if (true)
                         <div class="aiz-carousel dots-inside-bottom mobile-img-auto-height" data-arrows="true" data-dots="true" data-autoplay="true" data-infinite="true">
                             @php $slider_images = json_decode(get_setting('home_slider_images'), true);  @endphp
@@ -41,16 +41,14 @@
                     @if (count($featured_categories) > 0)
                         <ul class="list-unstyled mb-0 row gutters-5">
                             @foreach ($featured_categories as $key => $category)
-                                <li class="minw-0 col-4 col-md mt-3">
-                                    <a href="{{ route('products.category', $category->slug) }}" class="d-block rounded header_color p-2 text-white shadow-sm">
-                                        <img style="border-radius: 2px;"
+                                <li class="minw-0 col-3 col-md mt-3">
+                                    <a href="{{ route('products.category', $category->slug) }}" class="d-block rounded p-2 shadow-sm text-center">
+                                        <img style="border-radius: 100%; width: 40px;"
                                             src="{{ static_asset('assets/img/placeholder.jpg') }}"
                                             data-src="{{ uploaded_asset($category->banner) }}"
                                             alt="{{ $category->getTranslation('name') }}"
                                             class="lazyload img-fit"
-                                            height="78"
-                                            onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';"
-                                        >
+                                            onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
                                         <div class="text-truncate fs-12 fw-600 mt-2 opacity-70">{{ $category->getTranslation('name') }}</div>
                                     </a>
                                 </li>
@@ -194,7 +192,7 @@
                     @php $banner_1_imags = json_decode(get_setting('home_banner1_images')); @endphp
                     @foreach ($banner_1_imags as $key => $value)
                         <div class="col-xl col-md-6">
-                            <div class="mb-3 mb-lg-0">
+                            <div class="mb-3 mb-lg-0" style="border-radius: 15px; overflow: hidden;">
                                 <a href="{{ json_decode(get_setting('home_banner1_links'), true)[$key] }}" class="d-block text-reset">
                                     <img src="{{ static_asset('assets/img/placeholder-rect.jpg') }}" data-src="{{ uploaded_asset($banner_1_imags[$key]) }}" alt="{{ env('APP_NAME') }} promo" class="img-fluid lazyload">
                                 </a>

@@ -15,8 +15,7 @@
                         data-src="{{ uploaded_asset($category->icon) }}"
                         width="16"
                         alt="{{ $category->getTranslation('name') }}"
-                        onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';"
-                    >
+                        onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
                     <span class="cat-name">{{ $category->getTranslation('name') }}</span>
                 </a>
                 @if(count(\App\Utility\CategoryUtility::get_immediate_children_ids($category->id))>0)

@@ -137,18 +137,17 @@
                         </li>
                         @if (\App\Addon::where('unique_identifier', 'affiliate_system')->first() != null && \App\Addon::where('unique_identifier', 'affiliate_system')->first()->activated)
                             <li class="mb-2">
-                                <a class="opacity-50 hov-opacity-100 text-light" href="{{ route('affiliate.apply') }}">{{ translate('Networking & Affiliate')}}</a>
+                                <a class="opacity-50 hov-opacity-100 text-light" href="{{ route('affiliate.apply') }}">{{ translate('Networking Associates')}}</a>
                             </li>
                         @endif
                     </ul>
                 </div>
                 @if (get_setting('vendor_system_activation') == 1)
                     <div class="text-center text-md-left mt-4">
-                        <h4 class="fs-13 text-uppercase fw-600 border-bottom border-gray-900 pb-2 mb-4">
+                        <a href="{{ route('shops.create') }}">
+                        <h4 class="fs-13 text-uppercase fw-600 border-bottom border-gray-900 pb-2 mb-4 text-white">
                             {{ translate('Be a Seller') }}
                         </h4>
-                        <a href="{{ route('shops.create') }}" class="btn btn-primary btn-sm shadow-md">
-                            {{ translate('Apply Now') }}
                         </a>
                     </div>
                 @endif
