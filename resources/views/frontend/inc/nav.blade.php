@@ -90,8 +90,8 @@
     </div>
 </div>
 <!-- END Top Bar -->
-<header class="@if(get_setting('header_stikcy') == 'on') sticky-top @endif z-1020  border-bottom shadow-sm text-white header_color">
-    <div class="position-relative logo-bar-area">
+<header class="@if(get_setting('header_stikcy') == 'on') sticky-top @endif z-1020  border-bottom shadow-sm" style="background-color: white; color: var(--primary)">
+    <div class="position-relative logo-bar-area d-none d-xl-block d-lg-block">
         <div class="container">
             <div class="d-flex align-items-center">
 
@@ -123,7 +123,7 @@
                     </a>
                 </div>
                 <!--Customize header--->
-                <div class="flex-grow-1 front-header-search d-flex align-items-center bg-white">
+                <div class="flex-grow-1 front-header-search d-flex align-items-center bg-white class-toggle">
                     <div class="position-relative flex-grow-1">
                         <form action="{{ route('search') }}" method="GET" class="stop-propagation">
                             <div class="d-flex position-relative align-items-center">
@@ -153,7 +153,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="d-none d-lg-none ml-3 mr-0">
                     <div class="nav-search-box">
                         <a href="#" class="nav-box-link">
@@ -179,7 +178,6 @@
                         @include('frontend.partials.cart')
                     </div>
                 </div>
-
             </div>
         </div>
         @if(Route::currentRouteName() != 'home')
@@ -194,4 +192,20 @@
             </div>
         @endif
     </div>
+
+    <div class="d-block d-sm-none" style="overflow: hidden; margin-left: 10px; margin-right: 10px;">
+        <form action="{{ route('search') }}" method="GET" class="stop-propagation">
+            <div class="d-flex position-relative align-items-center">
+                <div class="input-group" style="border-radius: 100px; border: 2px solid white;">
+                    <input type="text" class="border-0 border-lg form-control" id="search" name="q" placeholder="{{translate('I am shopping for...')}}" autocomplete="off">
+                    <div class="input-group-append d-none d-lg-block">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="la la-search la-flip-horizontal fs-18"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </header>
