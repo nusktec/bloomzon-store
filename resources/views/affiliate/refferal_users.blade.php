@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0 h6">{{ translate('Refferal Users')}}</h5>
+            <h5 class="mb-0 h6">{{ translate('Referral Users')}}</h5>
         </div>
         <div class="card-body">
             <table class="table aiz-table mb-0">
@@ -13,7 +13,7 @@
                     <th>{{ translate('Name')}}</th>
                     <th>{{ translate('Phone')}}</th>
                     <th>{{ translate('Email Address')}}</th>
-                    <th>{{ translate('Reffered By')}}</th>
+                    <th>{{ translate('Referred By')}}</th>
                 </tr>
                 </thead>
                 <tbody>

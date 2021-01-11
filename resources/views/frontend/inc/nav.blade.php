@@ -6,6 +6,9 @@
 <!-- Top Bar -->
 <div class="top-navbar bg-white border-bottom border-soft-secondary z-1035">
     <div class="container">
+        <div class="row d-block d-sm-none">
+            <img src="{{static_asset('top_bg.png')}}" alt="top_banner" style="height: 20%; width: 100%;">
+        </div>
         <div class="row">
             <div class="col-lg-7 col">
                 <ul class="list-inline d-flex justify-content-between justify-content-lg-start mb-0">

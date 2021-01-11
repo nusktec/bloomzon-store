@@ -407,23 +407,23 @@
                       <li class="aiz-side-nav-item">
                           <a href="#" class="aiz-side-nav-link">
                               <i class="las la-link aiz-side-nav-icon"></i>
-                              <span class="aiz-side-nav-text">{{translate('Affiliate & Networking System')}}</span>
+                              <span class="aiz-side-nav-text">{{translate('Networking Associates Setup')}}</span>
                               <span class="aiz-side-nav-arrow"></span>
                           </a>
                           <ul class="aiz-side-nav-list level-2">
                               <li class="aiz-side-nav-item">
                                   <a href="{{route('affiliate.configs')}}" class="aiz-side-nav-link">
-                                      <span class="aiz-side-nav-text">{{translate('Affiliate Registration Form')}}</span>
+                                      <span class="aiz-side-nav-text">{{translate('Setup Registration Form')}}</span>
                                   </a>
                               </li>
                               <li class="aiz-side-nav-item">
                                   <a href="{{route('affiliate.index')}}" class="aiz-side-nav-link">
-                                      <span class="aiz-side-nav-text">{{translate('Affiliate Configurations')}}</span>
+                                      <span class="aiz-side-nav-text">{{translate('Configurations')}}</span>
                                   </a>
                               </li>
                               <li class="aiz-side-nav-item">
                                   <a href="{{route('affiliate.users')}}" class="aiz-side-nav-link {{ areActiveRoutes(['affiliate.users', 'affiliate_users.show_verification_request', 'affiliate_user.payment_history'])}}">
-                                      <span class="aiz-side-nav-text">{{translate('Affiliate Users')}}</span>
+                                      <span class="aiz-side-nav-text">{{translate('List Users')}}</span>
                                   </a>
                               </li>
                               <li class="aiz-side-nav-item">
@@ -433,7 +433,7 @@
                               </li>
                               <li class="aiz-side-nav-item">
                                   <a href="{{route('affiliate.withdraw_requests')}}" class="aiz-side-nav-link">
-                                      <span class="aiz-side-nav-text">{{translate('Affiliate Withdraw Requests')}}</span>
+                                      <span class="aiz-side-nav-text">{{translate('Withdraw Requests')}}</span>
                                   </a>
                               </li>
                           </ul>

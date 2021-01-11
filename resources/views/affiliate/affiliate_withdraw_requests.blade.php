@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0 h6">{{translate('Affiliate Withdraw Request')}}</h5>
+            <h5 class="mb-0 h6">{{translate('Withdraw Request')}}</h5>
         </div>
         <div class="card-body">
             <table class="table aiz-table mb-0">

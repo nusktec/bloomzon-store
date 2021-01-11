@@ -18,7 +18,7 @@ Route::get('/convert_assets', 'DemoController@convert_assets');
 Route::get('/convert_category', 'DemoController@convert_category');
 
 
-Route::get('/refresh-csrf', function(){
+Route::get('/refresh-csrf', function () {
     return csrf_token();
 });
 Route::post('/aiz-uploader', 'AizUploadController@show_uploader');
@@ -63,8 +63,8 @@ Route::post('/category/nav-element-list', 'HomeController@get_category_items')->
 //Flash Deal Details Page
 Route::get('/flash-deal/{slug}', 'HomeController@flash_deal_details')->name('flash-deal-details');
 
-Route::get('/sitemap.xml', function(){
-	return base_path('sitemap.xml');
+Route::get('/sitemap.xml', function () {
+    return base_path('sitemap.xml');
 });
 
 
@@ -95,10 +95,10 @@ Route::post('/cart/removeFromCart', 'CartController@removeFromCart')->name('cart
 Route::post('/cart/updateQuantity', 'CartController@updateQuantity')->name('cart.updateQuantity');
 
 //Checkout Routes
-Route::group(['middleware' => ['checkout']], function(){
-	Route::get('/checkout', 'CheckoutController@get_shipping_info')->name('checkout.shipping_info');
-	Route::any('/checkout/delivery_info', 'CheckoutController@store_shipping_info')->name('checkout.store_shipping_infostore');
-	Route::post('/checkout/payment_select', 'CheckoutController@store_delivery_info')->name('checkout.store_delivery_info');
+Route::group(['middleware' => ['checkout']], function () {
+    Route::get('/checkout', 'CheckoutController@get_shipping_info')->name('checkout.shipping_info');
+    Route::any('/checkout/delivery_info', 'CheckoutController@store_shipping_info')->name('checkout.store_shipping_infostore');
+    Route::post('/checkout/payment_select', 'CheckoutController@store_delivery_info')->name('checkout.store_delivery_info');
 });
 
 Route::get('/checkout/order-confirmed', 'CheckoutController@order_confirmed')->name('order_confirmed');
@@ -133,7 +133,7 @@ Route::get('/compare', 'CompareController@index')->name('compare');
 Route::get('/compare/reset', 'CompareController@reset')->name('compare.reset');
 Route::post('/compare/addToCompare', 'CompareController@addToCompare')->name('compare.addToCompare');
 
-Route::resource('subscribers','SubscriberController');
+Route::resource('subscribers', 'SubscriberController');
 
 Route::get('/brands', 'HomeController@all_brands')->name('brands.all');
 Route::get('/categories', 'HomeController@all_categories')->name('categories.all');
@@ -145,107 +145,107 @@ Route::get('/supportpolicy', 'HomeController@supportpolicy')->name('supportpolic
 Route::get('/terms', 'HomeController@terms')->name('terms');
 Route::get('/privacypolicy', 'HomeController@privacypolicy')->name('privacypolicy');
 
-Route::group(['middleware' => ['user', 'verified','unbanned']], function(){
-	Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-	Route::get('/profile', 'HomeController@profile')->name('profile');
-	Route::post('/new-user-verification', 'HomeController@new_verify')->name('user.new.verify');
-	Route::post('/new-user-email', 'HomeController@update_email')->name('user.change.email');
-	Route::post('/customer/update-profile', 'HomeController@customer_update_profile')->name('customer.profile.update');
-	Route::post('/seller/update-profile', 'HomeController@seller_update_profile')->name('seller.profile.update');
+Route::group(['middleware' => ['user', 'verified', 'unbanned']], function () {
+    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+    Route::get('/profile', 'HomeController@profile')->name('profile');
+    Route::post('/new-user-verification', 'HomeController@new_verify')->name('user.new.verify');
+    Route::post('/new-user-email', 'HomeController@update_email')->name('user.change.email');
+    Route::post('/customer/update-profile', 'HomeController@customer_update_profile')->name('customer.profile.update');
+    Route::post('/seller/update-profile', 'HomeController@seller_update_profile')->name('seller.profile.update');
 
-	Route::resource('purchase_history','PurchaseHistoryController');
-	Route::post('/purchase_history/details', 'PurchaseHistoryController@purchase_history_details')->name('purchase_history.details');
-	Route::get('/purchase_history/destroy/{id}', 'PurchaseHistoryController@destroy')->name('purchase_history.destroy');
-	Route::get('/purchase_buyagain', 'PurchaseHistoryController@buyagain')->name('purchase_history.buyagain');
+    Route::resource('purchase_history', 'PurchaseHistoryController');
+    Route::post('/purchase_history/details', 'PurchaseHistoryController@purchase_history_details')->name('purchase_history.details');
+    Route::get('/purchase_history/destroy/{id}', 'PurchaseHistoryController@destroy')->name('purchase_history.destroy');
+    Route::get('/purchase_buyagain', 'PurchaseHistoryController@buyagain')->name('purchase_history.buyagain');
 
-	Route::resource('wishlists','WishlistController');
-	Route::post('/wishlists/remove', 'WishlistController@remove')->name('wishlists.remove');
+    Route::resource('wishlists', 'WishlistController');
+    Route::post('/wishlists/remove', 'WishlistController@remove')->name('wishlists.remove');
 
-	Route::get('/wallet', 'WalletController@index')->name('wallet.index');
-	Route::post('/recharge', 'WalletController@recharge')->name('wallet.recharge');
+    Route::get('/wallet', 'WalletController@index')->name('wallet.index');
+    Route::post('/recharge', 'WalletController@recharge')->name('wallet.recharge');
 
-	Route::resource('support_ticket','SupportTicketController');
-	Route::post('support_ticket/reply','SupportTicketController@seller_store')->name('support_ticket.seller_store');
+    Route::resource('support_ticket', 'SupportTicketController');
+    Route::post('support_ticket/reply', 'SupportTicketController@seller_store')->name('support_ticket.seller_store');
 
-	Route::post('/customer_packages/purchase', 'CustomerPackageController@purchase_package')->name('customer_packages.purchase');
-	Route::resource('customer_products', 'CustomerProductController');
-    Route::get('/customer_products/{id}/edit','CustomerProductController@edit')->name('customer_products.edit');
-	Route::post('/customer_products/published', 'CustomerProductController@updatePublished')->name('customer_products.published');
-	Route::post('/customer_products/status', 'CustomerProductController@updateStatus')->name('customer_products.update.status');
+    Route::post('/customer_packages/purchase', 'CustomerPackageController@purchase_package')->name('customer_packages.purchase');
+    Route::resource('customer_products', 'CustomerProductController');
+    Route::get('/customer_products/{id}/edit', 'CustomerProductController@edit')->name('customer_products.edit');
+    Route::post('/customer_products/published', 'CustomerProductController@updatePublished')->name('customer_products.published');
+    Route::post('/customer_products/status', 'CustomerProductController@updateStatus')->name('customer_products.update.status');
 
-	Route::get('digital_purchase_history', 'PurchaseHistoryController@digital_index')->name('digital_purchase_history.index');
+    Route::get('digital_purchase_history', 'PurchaseHistoryController@digital_index')->name('digital_purchase_history.index');
 });
 
 Route::get('/customer_products/destroy/{id}', 'CustomerProductController@destroy')->name('customer_products.destroy');
 
-Route::group(['prefix' =>'seller', 'middleware' => ['seller', 'verified', 'user']], function(){
-	Route::get('/products', 'HomeController@seller_product_list')->name('seller.products');
-	Route::get('/product/upload', 'HomeController@show_product_upload_form')->name('seller.products.upload');
-	Route::get('/product/{id}/edit', 'HomeController@show_product_edit_form')->name('seller.products.edit');
-	Route::resource('payments','PaymentController');
+Route::group(['prefix' => 'seller', 'middleware' => ['seller', 'verified', 'user']], function () {
+    Route::get('/products', 'HomeController@seller_product_list')->name('seller.products');
+    Route::get('/product/upload', 'HomeController@show_product_upload_form')->name('seller.products.upload');
+    Route::get('/product/{id}/edit', 'HomeController@show_product_edit_form')->name('seller.products.edit');
+    Route::resource('payments', 'PaymentController');
 
-	Route::get('/shop/apply_for_verification', 'ShopController@verify_form')->name('shop.verify');
-	Route::post('/shop/apply_for_verification', 'ShopController@verify_form_store')->name('shop.verify.store');
+    Route::get('/shop/apply_for_verification', 'ShopController@verify_form')->name('shop.verify');
+    Route::post('/shop/apply_for_verification', 'ShopController@verify_form_store')->name('shop.verify.store');
 
-	Route::get('/reviews', 'ReviewController@seller_reviews')->name('reviews.seller');
+    Route::get('/reviews', 'ReviewController@seller_reviews')->name('reviews.seller');
 
-	//digital Product
-	Route::get('/digitalproducts', 'HomeController@seller_digital_product_list')->name('seller.digitalproducts');
-	Route::get('/digitalproducts/upload', 'HomeController@show_digital_product_upload_form')->name('seller.digitalproducts.upload');
-	Route::get('/digitalproducts/{id}/edit', 'HomeController@show_digital_product_edit_form')->name('seller.digitalproducts.edit');
+    //digital Product
+    Route::get('/digitalproducts', 'HomeController@seller_digital_product_list')->name('seller.digitalproducts');
+    Route::get('/digitalproducts/upload', 'HomeController@show_digital_product_upload_form')->name('seller.digitalproducts.upload');
+    Route::get('/digitalproducts/{id}/edit', 'HomeController@show_digital_product_edit_form')->name('seller.digitalproducts.edit');
 });
 
-Route::group(['middleware' => ['auth']], function(){
-	Route::post('/products/store/','ProductController@store')->name('products.store');
-	Route::post('/products/update/{id}','ProductController@update')->name('products.update');
-	Route::get('/products/destroy/{id}', 'ProductController@destroy')->name('products.destroy');
-	Route::get('/products/duplicate/{id}', 'ProductController@duplicate')->name('products.duplicate');
-	Route::post('/products/sku_combination', 'ProductController@sku_combination')->name('products.sku_combination');
-	Route::post('/products/sku_combination_edit', 'ProductController@sku_combination_edit')->name('products.sku_combination_edit');
-	Route::post('/products/featured', 'ProductController@updateFeatured')->name('products.featured');
-	Route::post('/products/published', 'ProductController@updatePublished')->name('products.published');
+Route::group(['middleware' => ['auth']], function () {
+    Route::post('/products/store/', 'ProductController@store')->name('products.store');
+    Route::post('/products/update/{id}', 'ProductController@update')->name('products.update');
+    Route::get('/products/destroy/{id}', 'ProductController@destroy')->name('products.destroy');
+    Route::get('/products/duplicate/{id}', 'ProductController@duplicate')->name('products.duplicate');
+    Route::post('/products/sku_combination', 'ProductController@sku_combination')->name('products.sku_combination');
+    Route::post('/products/sku_combination_edit', 'ProductController@sku_combination_edit')->name('products.sku_combination_edit');
+    Route::post('/products/featured', 'ProductController@updateFeatured')->name('products.featured');
+    Route::post('/products/published', 'ProductController@updatePublished')->name('products.published');
 
-	Route::get('invoice/customer/{order_id}', 'InvoiceController@customer_invoice_download')->name('customer.invoice.download');
-	Route::get('invoice/seller/{order_id}', 'InvoiceController@seller_invoice_download')->name('seller.invoice.download');
+    Route::get('invoice/customer/{order_id}', 'InvoiceController@customer_invoice_download')->name('customer.invoice.download');
+    Route::get('invoice/seller/{order_id}', 'InvoiceController@seller_invoice_download')->name('seller.invoice.download');
 
-	Route::resource('orders','OrderController');
-	Route::get('/orders/destroy/{id}', 'OrderController@destroy')->name('orders.destroy');
-	Route::post('/orders/details', 'OrderController@order_details')->name('orders.details');
-	Route::post('/orders/update_delivery_status', 'OrderController@update_delivery_status')->name('orders.update_delivery_status');
-	Route::post('/orders/update_payment_status', 'OrderController@update_payment_status')->name('orders.update_payment_status');
+    Route::resource('orders', 'OrderController');
+    Route::get('/orders/destroy/{id}', 'OrderController@destroy')->name('orders.destroy');
+    Route::post('/orders/details', 'OrderController@order_details')->name('orders.details');
+    Route::post('/orders/update_delivery_status', 'OrderController@update_delivery_status')->name('orders.update_delivery_status');
+    Route::post('/orders/update_payment_status', 'OrderController@update_payment_status')->name('orders.update_payment_status');
 
-	Route::resource('/reviews', 'ReviewController');
+    Route::resource('/reviews', 'ReviewController');
 
-	Route::resource('/withdraw_requests', 'SellerWithdrawRequestController');
-	Route::get('/withdraw_requests_all', 'SellerWithdrawRequestController@request_index')->name('withdraw_requests_all');
-	Route::post('/withdraw_request/payment_modal', 'SellerWithdrawRequestController@payment_modal')->name('withdraw_request.payment_modal');
-	Route::post('/withdraw_request/message_modal', 'SellerWithdrawRequestController@message_modal')->name('withdraw_request.message_modal');
+    Route::resource('/withdraw_requests', 'SellerWithdrawRequestController');
+    Route::get('/withdraw_requests_all', 'SellerWithdrawRequestController@request_index')->name('withdraw_requests_all');
+    Route::post('/withdraw_request/payment_modal', 'SellerWithdrawRequestController@payment_modal')->name('withdraw_request.payment_modal');
+    Route::post('/withdraw_request/message_modal', 'SellerWithdrawRequestController@message_modal')->name('withdraw_request.message_modal');
 
-	Route::resource('conversations','ConversationController');
-	Route::get('/conversations/destroy/{id}', 'ConversationController@destroy')->name('conversations.destroy');
-	Route::post('conversations/refresh','ConversationController@refresh')->name('conversations.refresh');
-	Route::resource('messages','MessageController');
+    Route::resource('conversations', 'ConversationController');
+    Route::get('/conversations/destroy/{id}', 'ConversationController@destroy')->name('conversations.destroy');
+    Route::post('conversations/refresh', 'ConversationController@refresh')->name('conversations.refresh');
+    Route::resource('messages', 'MessageController');
 
-	//Product Bulk Upload
-	Route::get('/product-bulk-upload/index', 'ProductBulkUploadController@index')->name('product_bulk_upload.index');
-	Route::post('/bulk-product-upload', 'ProductBulkUploadController@bulk_upload')->name('bulk_product_upload');
-	Route::get('/product-csv-download/{type}', 'ProductBulkUploadController@import_product')->name('product_csv.download');
-	Route::get('/vendor-product-csv-download/{id}', 'ProductBulkUploadController@import_vendor_product')->name('import_vendor_product.download');
-	Route::group(['prefix' =>'bulk-upload/download'], function(){
-		Route::get('/category', 'ProductBulkUploadController@pdf_download_category')->name('pdf.download_category');
-		Route::get('/sub_category', 'ProductBulkUploadController@pdf_download_sub_category')->name('pdf.download_sub_category');
-		Route::get('/sub_sub_category', 'ProductBulkUploadController@pdf_download_sub_sub_category')->name('pdf.download_sub_sub_category');
-		Route::get('/brand', 'ProductBulkUploadController@pdf_download_brand')->name('pdf.download_brand');
-		Route::get('/seller', 'ProductBulkUploadController@pdf_download_seller')->name('pdf.download_seller');
-	});
+    //Product Bulk Upload
+    Route::get('/product-bulk-upload/index', 'ProductBulkUploadController@index')->name('product_bulk_upload.index');
+    Route::post('/bulk-product-upload', 'ProductBulkUploadController@bulk_upload')->name('bulk_product_upload');
+    Route::get('/product-csv-download/{type}', 'ProductBulkUploadController@import_product')->name('product_csv.download');
+    Route::get('/vendor-product-csv-download/{id}', 'ProductBulkUploadController@import_vendor_product')->name('import_vendor_product.download');
+    Route::group(['prefix' => 'bulk-upload/download'], function () {
+        Route::get('/category', 'ProductBulkUploadController@pdf_download_category')->name('pdf.download_category');
+        Route::get('/sub_category', 'ProductBulkUploadController@pdf_download_sub_category')->name('pdf.download_sub_category');
+        Route::get('/sub_sub_category', 'ProductBulkUploadController@pdf_download_sub_sub_category')->name('pdf.download_sub_sub_category');
+        Route::get('/brand', 'ProductBulkUploadController@pdf_download_brand')->name('pdf.download_brand');
+        Route::get('/seller', 'ProductBulkUploadController@pdf_download_seller')->name('pdf.download_seller');
+    });
 
-	//Product Export
-	Route::get('/product-bulk-export', 'ProductBulkUploadController@export')->name('product_bulk_export.index');
+    //Product Export
+    Route::get('/product-bulk-export', 'ProductBulkUploadController@export')->name('product_bulk_export.index');
 
-	Route::resource('digitalproducts','DigitalProductController');
+    Route::resource('digitalproducts', 'DigitalProductController');
     Route::get('/digitalproducts/edit/{id}', 'DigitalProductController@edit')->name('digitalproducts.edit');
-	Route::get('/digitalproducts/destroy/{id}', 'DigitalProductController@destroy')->name('digitalproducts.destroy');
-	Route::get('/digitalproducts/download/{id}', 'DigitalProductController@download')->name('digitalproducts.download');
+    Route::get('/digitalproducts/destroy/{id}', 'DigitalProductController@destroy')->name('digitalproducts.destroy');
+    Route::get('/digitalproducts/download/{id}', 'DigitalProductController@download')->name('digitalproducts.download');
 });
 
 Route::resource('shops', 'ShopController');
@@ -267,7 +267,7 @@ Route::any('/iyzico/payment/callback', 'IyzicoController@callback')->name('iyzic
 Route::post('twocheckout/payment/callback', 'TwoCheckoutController@twocheckoutPost')->name('twocheckout.post');
 //2checkout END
 
-Route::resource('addresses','AddressController');
+Route::resource('addresses', 'AddressController');
 Route::get('/addresses/destroy/{id}', 'AddressController@destroy')->name('addresses.destroy');
 Route::get('/addresses/set_default/{id}', 'AddressController@set_default')->name('addresses.set_default');
 

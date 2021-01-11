@@ -6,7 +6,7 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="mb-0 h6">{{ translate('Basic Affiliate')}}</h6>
+                    <h6 class="mb-0 h6">{{ translate('Basic Networking Associates')}}</h6>
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" action="{{ route('affiliate.store') }}" method="POST">
@@ -55,7 +55,7 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0 h6">{{ translate('Product Sharing Affiliate')}}</h3>
+                    <h3 class="mb-0 h6">{{ translate('Product Sharing Networking Associates')}}</h3>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('affiliate.store') }}" method="POST">
@@ -109,7 +109,7 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0 h6">{{ translate('Product Sharing Affiliate (Category Wise)')}}</h3>
+                    <h3 class="mb-0 h6">{{ translate('Product Sharing (Category Wise)')}}</h3>
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" action="{{ route('affiliate.store') }}" method="POST">

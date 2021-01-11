@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h5 class="mb-0 h6">{{ translate('Affiliate payments of ').$affiliate_user->user->name }}</h5>
+        <h5 class="mb-0 h6">{{ translate('Networking Associates payments of ').$affiliate_user->user->name }}</h5>
     </div>
     <div class="card-body">
         <table class="table aiz-table mb-0">

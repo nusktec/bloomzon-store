@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 text-center text-lg-left">
-                    <h1 class="fw-600 h4">{{ translate('Affiliate Information\'s') }}</h1>
+                    <h1 class="fw-600 h4">{{ translate('Networking Associates Information\'s') }}</h1>
                 </div>
                 <div class="col-lg-6">
                     <ul class="breadcrumb bg-transparent p-0 justify-content-center justify-content-lg-end">

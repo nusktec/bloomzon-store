@@ -319,14 +319,14 @@
                                 @php $category = \App\Category::find($value); @endphp
                                 @if ($category != null)
                                     <div class="col-sm-6">
-                                        <a href="{{ route('products.category', $category->slug) }}" class="bg-white border d-block text-reset rounded p-2 hov-shadow-md mb-2">
+                                        <a href="{{ route('products.category', $category->slug) }}" class="bg-white border d-block text-reset p-2 hov-shadow-md mb-2" style="border-radius: 20px;">
                                             <div class="row align-items-center no-gutters">
                                                 <div class="col-3 text-center">
-                                                    <img
+                                                    <img style="border-radius: 10px;"
                                                         src="{{ static_asset('assets/img/placeholder.jpg') }}"
                                                         data-src="{{ uploaded_asset($category->banner) }}"
                                                         alt="{{ $category->getTranslation('name') }}"
-                                                        class="img-fluid img lazyload h-60px"
+                                                        class="img-fluid img lazyload h-60px shadow-sm"
                                                         onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';"
                                                     >
                                                 </div>
@@ -358,16 +358,15 @@
                                 @php $brand = \App\Brand::find($value); @endphp
                                 @if ($brand != null)
                                     <div class="col-sm-6">
-                                        <a href="{{ route('products.brand', $brand->slug) }}" class="bg-white border d-block text-reset rounded p-2 hov-shadow-md mb-2">
+                                        <a href="{{ route('products.brand', $brand->slug) }}" class="bg-white border d-block text-reset p-2 hov-shadow-md mb-2 overflow-hidden" style="border-radius: 20px;">
                                             <div class="row align-items-center no-gutters">
                                                 <div class="col-4 text-center">
-                                                    <img
+                                                    <img style="border-radius: 10px;background-size: cover"
                                                         src="{{ static_asset('assets/img/placeholder.jpg') }}"
                                                         data-src="{{ uploaded_asset($brand->logo) }}"
                                                         alt="{{ $brand->getTranslation('name') }}"
-                                                        class="img-fluid img lazyload h-60px"
-                                                        onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';"
-                                                    >
+                                                        class="img-fluid img lazyload h-60px shadow-sm"
+                                                        onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="text-truncate-2 pl-3 fs-14 fw-600 text-left">{{ $brand->getTranslation('name') }}</div>

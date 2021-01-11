@@ -9,7 +9,7 @@
                     <div class="aiz-titlebar mt-2 mb-4">
                         <div class="row align-items-center">
                             <div class="col-md-6">
-                                <h1 class="h3">{{ translate('Affiliate') }}</h1>
+                                <h1 class="h3">{{ translate('Networking Associates') }}</h1>
                             </div>
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                             </span>
                             <div class="px-3 pt-3 pb-3">
                                 <div class="h4 fw-700 text-center">{{ single_price(Auth::user()->affiliate_user->balance) }}</div>
-                                <div class="opacity-50 text-center">{{ translate('Affiliate Balance') }}</div>
+                                <div class="opacity-50 text-center">{{ translate('My Balance') }}</div>
                             </div>
                           </div>
                         </div>
@@ -40,7 +40,7 @@
                               <span class="size-60px rounded-circle mx-auto bg-secondary d-flex align-items-center justify-content-center mb-3">
                                   <i class="las la-plus la-3x text-white"></i>
                               </span>
-                              <div class="fs-18 text-primary">{{  translate('Affiliate Withdraw Request') }}</div>
+                              <div class="fs-18 text-primary">{{  translate('Withdraw Request') }}</div>
                           </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="mb-0 h6">{{ translate('Affiliate payment history')}}</h5>
+                                    <h5 class="mb-0 h6">{{ translate('Payment history')}}</h5>
                                 </div>
                                   <div class="card-body">
                                       <table class="table aiz-table mb-0">
@@ -106,7 +106,7 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="mb-0 h6">{{ translate('Affiliate withdraw request history')}}</h5>
+                                    <h5 class="mb-0 h6">{{ translate('Withdraw request history')}}</h5>
                                 </div>
                                   <div class="card-body">
                                       <table class="table aiz-table mb-0">
@@ -156,7 +156,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ translate('Affiliate Withdraw Request') }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ translate('Withdraw Request') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
 

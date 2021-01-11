@@ -1,35 +1,39 @@
-<section class="bg-white border-top mt-auto">
+<section class="bg-white border-top mt-auto d-none d-sm-block">
     <div class="container">
         <div class="row no-gutters">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-3 col-3">
                 <a class="text-reset border-left text-center p-4 d-block" href="{{ route('terms') }}">
-                    <i class="la la-file-text la-3x text-primary mb-2"></i>
-                    <h4 class="h6">{{ translate('Terms & conditions') }}</h4>
+                    <i class="la la-file-text la-2x text-primary mb-2"></i>
+                    <br/>
+                    <strong>{{ translate('Terms') }}</strong>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-3 col-3">
                 <a class="text-reset border-left text-center p-4 d-block" href="{{ route('returnpolicy') }}">
-                    <i class="la la-mail-reply la-3x text-primary mb-2"></i>
-                    <h4 class="h6">{{ translate('Return Policy') }}</h4>
+                    <i class="la la-mail-reply la-2x text-primary mb-2"></i>
+                    <br/>
+                    <strong>{{ translate('Return Policy') }}</strong>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-3 col-3">
                 <a class="text-reset border-left text-center p-4 d-block" href="{{ route('supportpolicy') }}">
-                    <i class="la la-support la-3x text-primary mb-2"></i>
-                    <h4 class="h6">{{ translate('Support Policy') }}</h4>
+                    <i class="la la-support la-2x text-primary mb-2"></i>
+                    <br/>
+                    <strong>{{ translate('Support Policy') }}</strong>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-3 col-3">
                 <a class="text-reset border-left border-right text-center p-4 d-block" href="{{ route('privacypolicy') }}">
-                    <i class="las la-exclamation-circle la-3x text-primary mb-2"></i>
-                    <h4 class="h6">{{ translate('Privacy Policy') }}</h4>
+                    <i class="las la-exclamation-circle la-2x text-primary mb-2"></i>
+                    <br/>
+                    <strong>{{ translate('Privacy Policy') }}</strong>
                 </a>
             </div>
         </div>
     </div>
 </section>
 
-<section class="bg-dark py-5 text-light">
+<section class="bg-dark py-5 text-light d-none d-sm-block">
     <div class="container">
         <div class="row">
             <div class="col-lg-5 col-xl-4 text-center text-md-left">
@@ -157,7 +161,7 @@
 </section>
 
 <!-- FOOTER -->
-<footer class="pt-3 pb-7 pb-xl-3 bg-black text-light">
+<footer class="pt-3 pb-7 pb-xl-3 bg-black text-light d-none d-sm-block">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-4">

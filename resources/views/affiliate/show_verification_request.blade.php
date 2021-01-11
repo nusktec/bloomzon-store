@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h5 class="mb-0 h6">{{ translate('Affiliate User Verification')}}</h5>
+        <h5 class="mb-0 h6">{{ translate('Networking Associates User Verification')}}</h5>
     </div>
     <div class="card-body row">
         <div class="col-md-4">

@@ -32,6 +32,27 @@
 		                    <div class="file-preview"></div>
 						</div>
 	                </div>
+					<div class="form-group row">
+						<label class="col-md-3 col-from-label">{{ translate('Mobile Banner Header') }}</label>
+						<div class="col-md-8">
+							<div class=" input-group " data-toggle="aizuploader" data-type="image">
+								<div class="input-group-prepend">
+									<div class="input-group-text bg-soft-secondary font-weight-medium">{{ translate('Browse') }}</div>
+								</div>
+								<div class="form-control file-amount">{{ translate('Choose File') }}</div>
+								<input type="hidden" name="types[]" value="banner_header">
+								<input type="hidden" name="banner_header" class="selected-files" value="{{ get_setting('banner_header') }}">
+							</div>
+							<div class="file-preview"></div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-3 col-from-label">{{translate('Header Banner Url')}}</label>
+						<div class="col-md-8">
+							<input type="hidden" name="types[]" value="banner_text">
+							<input type="text" name="banner_text" value="{{get_setting('banner_text')}}" class="form-control" placeholder="https://link-the-image-will-take">
+						</div>
+					</div>
                     <div class="form-group row">
 						<label class="col-md-3 col-from-label">{{translate('Show Language Switcher?')}}</label>
 						<div class="col-md-8">

@@ -1,7 +1,7 @@
 <form action="{{ route('affiliate_user.payment_store') }}" method="POST">
     @csrf
     <div class="modal-header">
-    	<h5 class="modal-title h6">{{ translate('Affiliate Payment')}}</h5>
+    	<h5 class="modal-title h6">{{ translate('Networking Associates Payment')}}</h5>
     	<button type="button" class="close" data-dismiss="modal">
     	</button>
     </div>

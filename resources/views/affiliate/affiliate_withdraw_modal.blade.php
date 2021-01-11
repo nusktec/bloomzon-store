@@ -1,7 +1,7 @@
 <form action="{{ route('withdraw_request.payment_store') }}" method="POST">
     @csrf
     <div class="modal-header">
-    	<h5 class="modal-title h6">{{translate('Affiliate Withdraw Request')}}</h5>
+    	<h5 class="modal-title h6">{{translate('Withdraw Request')}}</h5>
     	<button type="button" class="close" data-dismiss="modal">
     	</button>
     </div>
