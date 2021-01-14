@@ -246,7 +246,7 @@
                           <div class="col-md-8">
                               <select type="text" class="form-control mb-3" name="cnumber" placeholder="{{ translate('1234-1234-1111-xxxx')}}" required>
                                     <?php for($i=1; $i<=12; $i++){ ?>
-                                        <option><?php echo number_format($i); ?></option>
+                                        <option><?php echo sprintf('%02d',$i); ?></option>
                                   <?}?>
                               </select>
                           </div>
