@@ -146,6 +146,12 @@
                                     ->distinct()
                                     ->count();
                     @endphp
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('seller.user.ads') }}" class="aiz-side-nav-link {{ areActiveRoutes(['seller.user.ads'])}}">
+                                <i class="las la-bullhorn aiz-side-nav-icon"></i>
+                                <span class="aiz-side-nav-text">{{ translate('My Advertisement') }}</span>
+                            </a>
+                        </li>
                     <li class="aiz-side-nav-item hide_xm">
                         <a href="{{ route('orders.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['orders.index'])}}">
                             <i class="las la-money-bill aiz-side-nav-icon"></i>
@@ -242,7 +248,7 @@
                     <li class="aiz-side-nav-item">
                         <a href="{{ route('affiliate.user.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['affiliate.user.index', 'affiliate.payment_settings'])}}">
                             <i class="las la-dollar-sign aiz-side-nav-icon"></i>
-                            <span class="aiz-side-nav-text">{{translate('Affiliate System')}}</span>
+                            <span class="aiz-side-nav-text">{{translate('Networking Associates')}}</span>
                         </a>
                     </li>
                 @endif
@@ -266,6 +272,13 @@
                     <a href="{{ route('profile') }}" class="aiz-side-nav-link {{ areActiveRoutes(['profile'])}}">
                         <i class="las la-user aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">{{translate('Manage Profile')}}</span>
+                    </a>
+                </li>
+
+                <li class="aiz-side-nav-item">
+                    <a href="{{ route('language.currency') }}" class="aiz-side-nav-link {{ areActiveRoutes(['language.currency'])}}">
+                        <i class="las la-wallet aiz-side-nav-icon"></i>
+                        <span class="aiz-side-nav-text">{{translate('Language & Currency')}}</span>
                     </a>
                 </li>
 

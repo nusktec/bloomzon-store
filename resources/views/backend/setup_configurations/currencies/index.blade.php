@@ -14,6 +14,14 @@
                     @csrf
                     <div class="form-group row">
                         <div class="col-lg-3">
+                            <label for="ads" class="control-label">{{translate('Default Ads Charge')}}</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input id="ads" type="number" class="form-control" name="system_default_adscharge" value="{{get_setting('system_default_adscharge')}}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-3">
                             <label class="control-label">{{translate('System Default Currency')}}</label>
                         </div>
                         <div class="col-lg-6">
@@ -24,6 +32,7 @@
                             </select>
                         </div>
                         <input type="hidden" name="types[]" value="system_default_currency">
+                        <input type="hidden" name="types[]" value="system_default_adscharge">
                         <div class="col-lg-3">
                             <button class="btn btn-sm btn-primary" type="submit">{{translate('Save')}}</button>
                         </div>

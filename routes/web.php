@@ -148,6 +148,13 @@ Route::get('/privacypolicy', 'HomeController@privacypolicy')->name('privacypolic
 Route::group(['middleware' => ['user', 'verified', 'unbanned']], function () {
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::get('/profile', 'HomeController@profile')->name('profile');
+    Route::view('/language_currency', 'frontend.user.language_currency')->name('language.currency');
+    Route::view('/user_ads', 'frontend.user.user_ads')->name('seller.user.ads');
+
+    Route::get('/user_ads', 'AdsController@index')->name('seller.user.ads');
+    Route::post('/user_ads/create', 'AdsController@addNew')->name('seller.user.add');
+    Route::get('/user_ads/delete/{id}', 'AdsController@delete')->name('seller.user.del');
+
     Route::post('/new-user-verification', 'HomeController@new_verify')->name('user.new.verify');
     Route::post('/new-user-email', 'HomeController@update_email')->name('user.change.email');
     Route::post('/customer/update-profile', 'HomeController@customer_update_profile')->name('customer.profile.update');

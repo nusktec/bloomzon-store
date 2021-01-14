@@ -6,8 +6,8 @@
 <!-- Top Bar -->
 <div class="top-navbar bg-white border-bottom border-soft-secondary z-1035">
     <div class="container">
-        <div class="row d-block d-sm-none">
-            <img src="{{static_asset('top_bg.png')}}" alt="top_banner" style="height: 20%; width: 100%;">
+        <div style="cursor: pointer" class="row d-block d-sm-none" onclick="window.location.href='{{get_setting('banner_text')}}'">
+            <img src="{{uploaded_asset(get_setting('banner_header'))}}" alt="top_banner" style="height: 20%; width: 100%;">
         </div>
         <div class="row">
             <div class="col-lg-7 col">

@@ -15,36 +15,59 @@
                     </div>
                   </div>
                   <div class="row gutters-10">
-                      <div class="col-md-4 mx-auto mb-3" >
+                      <div class="col-md-6 mx-auto mb-3" >
                           <div class="bg-grad-1 text-white rounded-lg overflow-hidden">
                             <span class="size-30px rounded-circle mx-auto bg-soft-primary d-flex align-items-center justify-content-center mt-3">
                                 <i class="las la-dollar-sign la-2x text-white"></i>
                             </span>
                             <div class="px-3 pt-3 pb-3">
-                                <div class="h4 fw-700 text-center">{{ single_price(Auth::user()->balance) }}</div>
+                                <div class="h5 fw-700 text-center">{{ single_price(Auth::user()->balance) }}</div>
                                 <div class="opacity-50 text-center">{{ translate('Wallet Balance') }}</div>
                             </div>
                           </div>
                       </div>
-                      <div class="col-md-4 mx-auto mb-3" >
+                      <div class="col-md-3 mx-auto mb-3" >
                         <div class="p-3 rounded mb-3 c-pointer text-center bg-white shadow-sm hov-shadow-lg has-transition" onclick="show_wallet_modal()">
                             <span class="size-60px rounded-circle mx-auto bg-secondary d-flex align-items-center justify-content-center mb-3">
                                 <i class="las la-plus la-3x text-white"></i>
                             </span>
-                            <div class="fs-18 text-primary">{{ translate('Recharge Wallet') }}</div>
+                            <div class="fs-12 text-primary">{{ translate('Recharge Wallet') }}</div>
                         </div>
                       </div>
                       @if (\App\Addon::where('unique_identifier', 'offline_payment')->first() != null && \App\Addon::where('unique_identifier', 'offline_payment')->first()->activated)
-                          <div class="col-md-4 mx-auto mb-3" >
+                          <div class="col-md-3 mx-auto mb-3" >
                               <div class="p-3 rounded mb-3 c-pointer text-center bg-white shadow-sm hov-shadow-lg has-transition" onclick="show_make_wallet_recharge_modal()">
                                   <span class="size-60px rounded-circle mx-auto bg-secondary d-flex align-items-center justify-content-center mb-3">
                                       <i class="las la-plus la-3x text-white"></i>
                                   </span>
-                                  <div class="fs-18 text-primary">{{ translate('Offline Recharge Wallet') }}</div>
+                                  <div class="fs-12 text-primary">{{ translate('Offline Recharge Wallet') }}</div>
                               </div>
                           </div>
                       @endif
                   </div>
+
+                  <div class="row gutters-10">
+                      <div class="col-md-6 mx-auto mb-3" >
+                          <div class="bg-grad-3 text-white rounded-lg overflow-hidden">
+                            <span class="size-30px rounded-circle mx-auto d-flex align-items-center justify-content-center mt-3">
+                                <i class="las la-credit-card la-2x text-white"></i>
+                            </span>
+                              <div class="px-3 pt-3 pb-3">
+                                  <div class="h6 fw-700 text-center">{{'0000-0000-0000-0000'}}</div>
+                                  <div class="opacity-50 text-center">{{ translate('Added Card') }}</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6 mx-auto mb-3">
+                          <div class="p-3 rounded mb-3 c-pointer text-center bg-white shadow-sm hov-shadow-lg has-transition" onclick="show_card_modal()">
+                            <span class="size-60px rounded-circle mx-auto bg-secondary d-flex align-items-center justify-content-center mb-3">
+                                <i class="las la-credit-card la-3x text-white"></i>
+                            </span>
+                              <div class="fs-12 text-primary">{{ translate('Add Credit Card') }}</div>
+                          </div>
+                      </div>
+                  </div>
+
                   <div class="card">
                       <div class="card-header">
                           <h5 class="mb-0 h6">{{ translate('Wallet recharge history')}}</h5>
@@ -189,12 +212,69 @@
       </div>
   </div>
 
+  <!-- offline payment Modal -->
+  <div class="modal fade" id="show_card_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">{{ translate('Add New Card') }}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form class="" action="{{ route('wallet.recharge') }}" method="post">
+                  @csrf
+                  <div class="modal-body gry-bg px-3 pt-3">
+                      <div class="row">
+                          <div class="col-md-4">
+                              <label>{{ translate('Holder Name')}} <span class="text-danger">*</span></label>
+                          </div>
+                          <div class="col-md-8">
+                              <input type="text" class="form-control mb-3" name="cname" placeholder="{{ translate('Joe Glory')}}" required>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-4">
+                              <label>{{ translate('Card No.')}} <span class="text-danger">*</span></label>
+                          </div>
+                          <div class="col-md-8">
+                              <input type="text" class="form-control mb-3" name="cnumber" placeholder="{{ translate('1234-1234-1111-xxxx')}}" required>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-4">
+                              <label>{{ translate('Date')}} <span class="text-danger">*</span></label>
+                          </div>
+                          <div class="col-md-8">
+                              <select type="text" class="form-control mb-3" name="cnumber" placeholder="{{ translate('1234-1234-1111-xxxx')}}" required>
+                                    <?php for($i=1; $i<=12; $i++){ ?>
+                                        <option><?php echo number_format($i); ?></option>
+                                  <?}?>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-4">
+                              <label>{{ translate('Add Card')}} <span class="text-danger">*</span></label>
+                          </div>
+                      </div>
+                      <div class="form-group text-right">
+                          <button type="submit" class="btn btn-sm btn-primary transition-3d-hover mr-1">{{translate('Confirm')}}</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
 @endsection
 
 @section('script')
     <script type="text/javascript">
         function show_wallet_modal(){
             $('#wallet_modal').modal('show');
+        }
+
+        function show_card_modal(){
+            $('#show_card_modal').modal('show');
         }
 
         function show_make_wallet_recharge_modal(){

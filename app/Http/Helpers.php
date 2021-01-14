@@ -11,6 +11,7 @@ use App\Upload;
 use App\Translation;
 use App\Utility\TranslationUtility;
 use App\Utility\CategoryUtility;
+use App\User;
 use Twilio\Rest\Client;
 
 //highlights the selected navigation on admin panel
@@ -1219,5 +1220,18 @@ if (!function_exists('isMobile')) {
     function isMobile()
     {
         return $_SESSION['isMobile'];
+    }
+}
+
+//helper for public route
+if (!function_exists('isMobileLogin')) {
+    function isMobileLogin()
+    {
+        $email = @$_REQUEST['mdxEmail'];
+        if(!empty($email) || !$email){
+            $mobileUser = User::where('email', $email)->first();
+            // check if they're an existing user
+            auth()->login($mobileUser);
+        }
     }
 }

@@ -209,6 +209,28 @@
 
     </div>
 
+    {{-- Banner section 1 --}}
+    <?php
+    $ads = \App\Models\Advertisements::where('status', 1)->inRandomOrder(4)->limit(8)->get();
+    ?>
+    <div class="mb-4">
+        <div class="container">
+            <div class="row gutters-10">
+                @if (get_setting('home_banner1_images') != null)
+                    @foreach ($ads as $key => $value)
+                        <div class="col-xl col-md-3">
+                            <div class="mb-3 mb-lg-0" style="border-radius: 2px; overflow: hidden;">
+                                <a href="{{$value['banner_url']}}" class="d-block text-reset">
+                                    <img style="height: 150px" src="{{uploaded_asset($value['banner'])}}" data-src="{{uploaded_asset($value['banner'])}}" alt="{{ env('APP_NAME') }} promo" class="img-fluid lazyload">
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </div>
+
     {{-- Best Selling  --}}
     <div id="section_best_selling">
 

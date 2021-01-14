@@ -335,9 +335,9 @@
 			</div>
 			<div class="card-body">
 				<div class="form-group row">
-					<label class="col-md-3 col-from-label">{{translate('Meta Title')}}</label>
+					<label class="col-md-3 col-from-label">{{translate('SEO Title')}}</label>
 					<div class="col-md-8">
-						<input type="text" class="form-control" name="meta_title" placeholder="{{ translate('Meta Title') }}">
+						<input type="text" class="form-control" name="meta_title" placeholder="{{ translate('SEO Title') }}">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -347,7 +347,7 @@
 					</div>
 				</div>
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="signinSrEmail">{{ translate('Meta Image') }}</label>
+                    <label class="col-md-3 col-form-label" for="signinSrEmail">{{ translate('SEO Image') }}</label>
                     <div class="col-md-8">
                         <div class="input-group" data-toggle="aizuploader" data-type="image">
                             <div class="input-group-prepend">
