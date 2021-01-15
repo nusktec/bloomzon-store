@@ -18,14 +18,26 @@ class DigitalProductController extends Controller
      */
     public function index(Request $request)
     {
-        $sort_search    = null;
-        $products       = Product::orderBy('created_at', 'desc');
-        if ($request->has('search')){
-            $sort_search    = $request->search;
-            $products       = $products->where('name', 'like', '%'.$sort_search.'%');
+        $sort_search = null;
+        $products = Product::orderBy('created_at', 'desc');
+        if ($request->has('search')) {
+            $sort_search = $request->search;
+            $products = $products->where('name', 'like', '%' . $sort_search . '%');
         }
         $products = $products->where('digital', 1)->paginate(10);
-        return view('backend.product.digital_products.index', compact('products','sort_search'));
+        return view('backend.product.digital_products.index', compact('products', 'sort_search'));
+    }
+
+    public function indexPro(Request $request)
+    {
+        $sort_search = null;
+        $products = Product::where('is_service', 1)->orderBy('created_at', 'desc');
+        if ($request->has('search')) {
+            $sort_search = $request->search;
+            $products = $products->where('name', 'like', '%' . $sort_search . '%');
+        }
+        $products = $products->where('digital', 1)->paginate(10);
+        return view('backend.product.digital_products.professional', compact('products', 'sort_search'));
     }
 
     /**
@@ -41,70 +53,68 @@ class DigitalProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //dd($request->all());
-        $product                    = new Product;
-        $product->name              = $request->name;
-        $product->added_by          = $request->added_by;
-        $product->user_id           = Auth::user()->id;
-        $product->category_id       = $request->category_id;
-        $product->digital           = 1;
-        $product->photos            = $request->photos;
-        $product->thumbnail_img     = $request->thumbnail_img;
+        $product = new Product;
+        $product->name = $request->name;
+        $product->added_by = $request->added_by;
+        $product->user_id = Auth::user()->id;
+        $product->category_id = $request->category_id;
+        $product->digital = 1;
+        $product->photos = $request->photos;
+        $product->thumbnail_img = $request->thumbnail_img;
 
         $tags = array();
-        if($request->tags[0] != null){
+        if ($request->tags[0] != null) {
             foreach (json_decode($request->tags[0]) as $key => $tag) {
                 array_push($tags, $tag->value);
             }
         }
         $product->tags = implode(',', $tags);
 
-        $product->description       = $request->description;
-        $product->unit_price        = $request->unit_price;
-        $product->purchase_price    = $request->purchase_price;
-        $product->tax               = $request->tax;
-        $product->tax_type          = $request->tax_type;
-        $product->discount          = $request->discount;
-        $product->discount_type     = $request->discount_type;
+        $product->description = $request->description;
+        $product->unit_price = $request->unit_price;
+        $product->purchase_price = $request->purchase_price;
+        $product->tax = $request->tax;
+        $product->tax_type = $request->tax_type;
+        $product->discount = $request->discount;
+        $product->discount_type = $request->discount_type;
 
-        $product->meta_title        = $request->meta_title;
-        $product->meta_description  = $request->meta_description;
-        $product->meta_img          = $request->meta_img;
+        $product->meta_title = $request->meta_title;
+        $product->meta_description = $request->meta_description;
+        $product->meta_img = $request->meta_img;
 
-        if($request->hasFile('file')){
+        if ($request->hasFile('file')) {
             $product->file_name = $request->file('file')->getClientOriginalName();
             $product->file_path = $request->file('file')->store('uploads/products/digital');
         }
 
-        $product->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name)).'-'.rand(10000,99999);
+        $product->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name)) . '-' . rand(10000, 99999);
 
-        if($product->save()){
+        if ($product->save()) {
 
             // Product Translations
-            $product_translation                = ProductTranslation::firstOrNew(['lang' => env('DEFAULT_LANGUAGE'), 'product_id' => $product->id]);
-            $product_translation->name          = $request->name;
-            $product_translation->description   = $request->description;
+            $product_translation = ProductTranslation::firstOrNew(['lang' => env('DEFAULT_LANGUAGE'), 'product_id' => $product->id]);
+            $product_translation->name = $request->name;
+            $product_translation->description = $request->description;
             $product_translation->save();
 
             flash(translate('Digital Product has been inserted successfully'))->success();
-            if(Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff'){
+            if (Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff') {
                 return redirect()->route('digitalproducts.index');
-            }
-            else{
-                if(\App\Addon::where('unique_identifier', 'seller_subscription')->first() != null && \App\Addon::where('unique_identifier', 'seller_subscription')->first()->activated){
+            } else {
+                if (\App\Addon::where('unique_identifier', 'seller_subscription')->first() != null && \App\Addon::where('unique_identifier', 'seller_subscription')->first()->activated) {
                     $seller = Auth::user()->seller;
                     $seller->remaining_digital_uploads -= 1;
                     $seller->save();
                 }
                 return redirect()->route('seller.digitalproducts');
             }
-        }
-        else{
+        } else {
             flash(translate('Something went wrong'))->error();
             return back();
         }
@@ -113,7 +123,7 @@ class DigitalProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -124,79 +134,77 @@ class DigitalProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, $id)
     {
         $lang = $request->lang;
         $product = Product::findOrFail($id);
-        return view('backend.product.digital_products.edit', compact('product','lang'));
+        return view('backend.product.digital_products.edit', compact('product', 'lang'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $product                    = Product::findOrFail($id);
-        if($request->lang == env("DEFAULT_LANGUAGE")){
-            $product->name          = $request->name;
-            $product->description   = $request->description;
+        $product = Product::findOrFail($id);
+        if ($request->lang == env("DEFAULT_LANGUAGE")) {
+            $product->name = $request->name;
+            $product->description = $request->description;
         }
 
-        $product->user_id           = Auth::user()->id;
-        $product->category_id       = $request->category_id;
-        $product->digital           = 1;
-        $product->photos            = $request->photos;
-        $product->thumbnail_img     = $request->thumbnail_img;
+        $product->user_id = Auth::user()->id;
+        $product->category_id = $request->category_id;
+        $product->digital = 1;
+        $product->photos = $request->photos;
+        $product->thumbnail_img = $request->thumbnail_img;
 
         $tags = array();
-        if($request->tags[0] != null){
+        if ($request->tags[0] != null) {
             foreach (json_decode($request->tags[0]) as $key => $tag) {
                 array_push($tags, $tag->value);
             }
         }
         $product->tags = implode(',', $tags);
 
-        $product->unit_price        = $request->unit_price;
-        $product->purchase_price    = $request->purchase_price;
-        $product->tax               = $request->tax;
-        $product->tax_type          = $request->tax_type;
-        $product->discount          = $request->discount;
-        $product->discount_type     = $request->discount_type;
+        $product->unit_price = $request->unit_price;
+        $product->purchase_price = $request->purchase_price;
+        $product->tax = $request->tax;
+        $product->tax_type = $request->tax_type;
+        $product->discount = $request->discount;
+        $product->discount_type = $request->discount_type;
 
-        $product->meta_title        = $request->meta_title;
-        $product->meta_description  = $request->meta_description;
-        $product->meta_img          = $request->meta_img;
-        $product->slug              = strtolower($request->slug);
+        $product->meta_title = $request->meta_title;
+        $product->meta_description = $request->meta_description;
+        $product->meta_img = $request->meta_img;
+        $product->slug = strtolower($request->slug);
 
-        if($request->hasFile('file')){
+        if ($request->hasFile('file')) {
             $product->file_name = $request->file('file')->getClientOriginalName();
             $product->file_path = $request->file('file')->store('uploads/products/digital');
         }
 
-        if($product->save()){
+        if ($product->save()) {
 
             // Product Translations
-            $product_translation                = ProductTranslation::firstOrNew(['lang' => $request->lang, 'product_id' => $product->id]);
-            $product_translation->name          = $request->name;
-            $product_translation->description   = $request->description;
+            $product_translation = ProductTranslation::firstOrNew(['lang' => $request->lang, 'product_id' => $product->id]);
+            $product_translation->name = $request->name;
+            $product_translation->description = $request->description;
             $product_translation->save();
 
             flash(translate('Digital Product has been inserted successfully'))->success();
-            if(Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff'){
+            if (Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff') {
+                return back();
+            } else {
                 return back();
             }
-            else{
-                return back();
-            }
-        }
-        else{
+        } else {
             flash(translate('Something went wrong'))->error();
             return back();
         }
@@ -205,7 +213,7 @@ class DigitalProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -217,32 +225,31 @@ class DigitalProductController extends Controller
         Product::destroy($id);
 
         flash(translate('Product has been deleted successfully'))->success();
-        if(Auth::user()->user_type == 'admin'){
+        if (Auth::user()->user_type == 'admin') {
             return redirect()->route('digitalproducts.index');
-        }
-        else{
+        } else {
             return redirect()->route('seller.digitalproducts');
         }
 
     }
 
 
-    public function download(Request $request){
+    public function download(Request $request)
+    {
         $product = Product::findOrFail(decrypt($request->id));
         $downloadable = false;
         foreach (Auth::user()->orders as $key => $order) {
             foreach ($order->orderDetails as $key => $orderDetail) {
-                if($orderDetail->product_id == $product->id && $orderDetail->payment_status == 'paid'){
+                if ($orderDetail->product_id == $product->id && $orderDetail->payment_status == 'paid') {
                     $downloadable = true;
                     break;
                 }
             }
         }
-        if(Auth::user()->user_type == 'admin' || Auth::user()->id == $product->user_id || $downloadable){
+        if (Auth::user()->user_type == 'admin' || Auth::user()->id == $product->user_id || $downloadable) {
 
             return \Storage::disk('local')->download($product->file_path, $product->file_name);
-        }
-        else {
+        } else {
             abort(404);
         }
     }
@@ -251,7 +258,7 @@ class DigitalProductController extends Controller
     {
         $product = DigitalProduct::findOrFail($request->id);
         $product->published = $request->status;
-        if($product->save()){
+        if ($product->save()) {
             return 1;
         }
         return 0;

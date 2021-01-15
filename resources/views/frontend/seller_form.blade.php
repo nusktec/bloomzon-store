@@ -58,7 +58,7 @@
                         <div class="p-3">
                             <div class="form-group">
                                 <label>{{ translate('Shop Name')}} <span class="text-primary">*</span></label>
-                                <input type="text" class="form-control" placeholder="{{ translate('Shop Name')}}" name="name" required>
+                                <input type="text" class="form-control" placeholder="{{ translate('Shop Name / Service Name')}}" name="name" required>
                             </div>
                             <div class="form-group">
                                 <label>{{ translate('Logo')}}</label>
@@ -83,7 +83,7 @@
                     @endif
 
                     <div class="text-right">
-                        <button type="submit" class="btn btn-primary fw-600">{{ translate('Register Your Shop')}}</button>
+                        <button type="submit" class="btn btn-primary fw-600">{{ translate('Register Your Shop / Service')}}</button>
                     </div>
                 </form>
             </div>

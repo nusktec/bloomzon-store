@@ -16,6 +16,7 @@ class CheckForMobileApp
     {
         if (isset($request->xmd) && $request->xmd === env("MOBILE_AGENT")) {
             $_SESSION['isMobile'] = true;
+            isMobileLogin();
             return $next($request);
         } else {
             //remember to remove this line to keep long notice of the device

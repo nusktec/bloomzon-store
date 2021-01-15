@@ -175,6 +175,21 @@ class SellerController extends Controller
         return back();
     }
 
+    public function approve_seller_service(Request $r)
+    {
+        if(!$r->id){
+            return back();
+        }
+        $seller = User::findOrFail($r->id);
+        $seller->is_professional = $r->status;
+        if($seller->save()){
+            flash(translate('Professional service has been approved successfully'))->success();
+            return redirect()->route('sellers.index');
+        }
+        flash(translate('Something went wrong'))->error();
+        return back();
+    }
+
     public function reject_seller($id)
     {
         $seller = Seller::findOrFail($id);

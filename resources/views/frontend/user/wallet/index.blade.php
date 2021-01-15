@@ -53,7 +53,8 @@
                                 <i class="las la-credit-card la-2x text-white"></i>
                             </span>
                               <div class="px-3 pt-3 pb-3">
-                                  <div class="h6 fw-700 text-center">{{'0000-0000-0000-0000'}}</div>
+                                  <?php $card = \App\Cards::where('user_id', Auth::user()->id)->first(); ?>
+                                  <div class="h6 fw-700 text-center"><?php echo substr(encryptCard($card->cnumber, true), 0,4)."-XXXX-XXXX-".substr(encryptCard($card->cnumber, true), 13,16); ?></div>
                                   <div class="opacity-50 text-center">{{ translate('Added Card') }}</div>
                               </div>
                           </div>
@@ -220,7 +221,7 @@
                   <h5 class="modal-title" id="exampleModalLabel">{{ translate('Add New Card') }}</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form class="" action="{{ route('wallet.recharge') }}" method="post">
+              <form class="" action="{{ route('wallet.add.card') }}" method="post">
                   @csrf
                   <div class="modal-body gry-bg px-3 pt-3">
                       <div class="row">
@@ -228,7 +229,7 @@
                               <label>{{ translate('Holder Name')}} <span class="text-danger">*</span></label>
                           </div>
                           <div class="col-md-8">
-                              <input type="text" class="form-control mb-3" name="cname" placeholder="{{ translate('Joe Glory')}}" required>
+                              <input type="text" class="form-control mb-3" name="cholder" placeholder="{{ translate('Joe Glory')}}" required value="{{\Illuminate\Support\Facades\Auth::user()->name}}">
                           </div>
                       </div>
                       <div class="row">
@@ -236,28 +237,38 @@
                               <label>{{ translate('Card No.')}} <span class="text-danger">*</span></label>
                           </div>
                           <div class="col-md-8">
-                              <input type="text" class="form-control mb-3" name="cnumber" placeholder="{{ translate('1234-1234-1111-xxxx')}}" required>
+                              <input type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" class="form-control mb-3" name="cnumber" placeholder="{{ translate('1234-1234-1111-xxxx')}}" required>
                           </div>
                       </div>
                       <div class="row">
                           <div class="col-md-4">
                               <label>{{ translate('Date')}} <span class="text-danger">*</span></label>
                           </div>
-                          <div class="col-md-8">
-                              <select type="text" class="form-control mb-3" name="cnumber" placeholder="{{ translate('1234-1234-1111-xxxx')}}" required>
+                          <div class="col-md-4">
+                              <select type="text" class="form-control mb-3" name="cmonth" required>
                                     <?php for($i=1; $i<=12; $i++){ ?>
                                         <option><?php echo sprintf('%02d',$i); ?></option>
+                                  <?}?>
+                              </select>
+                          </div>
+                          <div class="col-md-4">
+                              <select type="text" class="form-control mb-3" name="cyear" required>
+                                  <?php for($i=date('Y'); $i<=date('Y')+20; $i++){ ?>
+                                  <option><?php echo sprintf('%04d',$i); ?></option>
                                   <?}?>
                               </select>
                           </div>
                       </div>
                       <div class="row">
                           <div class="col-md-4">
-                              <label>{{ translate('Add Card')}} <span class="text-danger">*</span></label>
+                              <label>{{ translate('CCV')}} <span class="text-danger">*</span></label>
+                          </div>
+                          <div class="col-md-8">
+                              <input maxlength="5" type="text" class="form-control mb-3" name="cccv" placeholder="{{ translate('123')}}" required>
                           </div>
                       </div>
                       <div class="form-group text-right">
-                          <button type="submit" class="btn btn-sm btn-primary transition-3d-hover mr-1">{{translate('Confirm')}}</button>
+                          <button type="submit" class="btn btn-sm btn-primary transition-3d-hover mr-1">{{translate('Add New Card')}}</button>
                       </div>
                   </div>
               </form>

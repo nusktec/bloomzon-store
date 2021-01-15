@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cards;
 use App\Utility\PayfastUtility;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PaypalController;
@@ -13,6 +14,7 @@ use Auth;
 use Session;
 use App\Wallet;
 use App\Utility\PayhereUtility;
+use Stripe\Card;
 
 class WalletController extends Controller
 {
@@ -28,7 +30,6 @@ class WalletController extends Controller
         $data['payment_method'] = $request->payment_option;
 
         // dd($data);
-
         $request->session()->put('payment_type', 'wallet_payment');
         $request->session()->put('payment_data', $data);
 
@@ -142,5 +143,44 @@ class WalletController extends Controller
             return 1;
         }
         return 0;
+    }
+    //new card
+    public function addNewCard(Request $request)
+    {
+        //add new card or update
+        $r = $request;
+        $id = Auth::user()->id;
+        $card = Cards::where('user_id', $id)->first();
+        if ($card) {
+            //update else new
+            $card = Cards::find($card->id);
+            $card->cholder = $r->cholder;
+            $card->cnumber = encryptCard($r->cnumber);
+            $card->cmonth = $r->cmonth;
+            $card->cyear = $r->cyear;
+            $card->cccv = $r->cccv;
+            $card->updated_at = time();
+            $card->save();
+            flash(translate('You have successfully updated your card !'))->success();
+        } else {
+            $card = new Cards;
+            //do update
+            $card->user_id = $id;
+            $card->cholder = $r->cholder;
+            $card->cnumber = encryptCard($r->cnumber);
+            $card->cmonth = $r->cmonth;
+            $card->cyear = $r->cyear;
+            $card->cccv = $r->cccv;
+            $card->save();
+            flash(translate('You have successfully added a new card !'))->success();
+        }
+        return redirect()->route('wallet.index');
+    }
+
+    //subscription
+    public function subscription()
+    {
+        $wallets = Wallet::where('offline_payment', 1)->paginate(10);
+        return view('frontend.user.wallet.subscription', compact('wallets'));
     }
 }

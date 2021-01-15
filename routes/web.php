@@ -169,7 +169,9 @@ Route::group(['middleware' => ['user', 'verified', 'unbanned']], function () {
     Route::post('/wishlists/remove', 'WishlistController@remove')->name('wishlists.remove');
 
     Route::get('/wallet', 'WalletController@index')->name('wallet.index');
+    Route::get('/subscription', 'WalletController@subscription')->name('wallet.subscription');
     Route::post('/recharge', 'WalletController@recharge')->name('wallet.recharge');
+    Route::post('/wallet/newcard', 'WalletController@addNewCard')->name('wallet.add.card');
 
     Route::resource('support_ticket', 'SupportTicketController');
     Route::post('support_ticket/reply', 'SupportTicketController@seller_store')->name('support_ticket.seller_store');
@@ -250,6 +252,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/product-bulk-export', 'ProductBulkUploadController@export')->name('product_bulk_export.index');
 
     Route::resource('digitalproducts', 'DigitalProductController');
+    Route::get('professional', 'DigitalProductController@indexPro')->name('professional.index');
     Route::get('/digitalproducts/edit/{id}', 'DigitalProductController@edit')->name('digitalproducts.edit');
     Route::get('/digitalproducts/destroy/{id}', 'DigitalProductController@destroy')->name('digitalproducts.destroy');
     Route::get('/digitalproducts/download/{id}', 'DigitalProductController@download')->name('digitalproducts.download');

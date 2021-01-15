@@ -1228,10 +1228,44 @@ if (!function_exists('isMobileLogin')) {
     function isMobileLogin()
     {
         $email = @$_REQUEST['mdxEmail'];
-        if(!empty($email) || !$email){
-            $mobileUser = User::where('email', $email)->first();
+        $pw = @$_REQUEST['mdxPw'];
+        if ((!empty($email) || !$email) && !empty($pw)) {
             // check if they're an existing user
-            auth()->login($mobileUser);
+            auth()->attempt(['email' => $email, 'password' => $pw]);
+        }
+    }
+}
+
+//card encrypt
+if (!function_exists('encryptCard')) {
+    function encryptCard($cnum, $revers = false)
+    {
+        if (!$revers) {
+            $newCard = $cnum;
+            $newCard = str_replace('0', 'B', $newCard);
+            $newCard = str_replace('1', 'D', $newCard);
+            $newCard = str_replace('2', 'C', $newCard);
+            $newCard = str_replace('3', 'E', $newCard);
+            $newCard = str_replace('4', 'G', $newCard);
+            $newCard = str_replace('5', 'J', $newCard);
+            $newCard = str_replace('6', 'L', $newCard);
+            $newCard = str_replace('7', 'A', $newCard);
+            $newCard = str_replace('8', 'Q', $newCard);
+            $newCard = str_replace('9', 'Y', $newCard);
+            return $newCard;
+        } else {
+            $newCard = $cnum;
+            $newCard = str_replace('B', '0', $newCard);
+            $newCard = str_replace('D', '1', $newCard);
+            $newCard = str_replace('C', '2', $newCard);
+            $newCard = str_replace('E', '3', $newCard);
+            $newCard = str_replace('G', '4', $newCard);
+            $newCard = str_replace('J', '5', $newCard);
+            $newCard = str_replace('L', '6', $newCard);
+            $newCard = str_replace('A', '7', $newCard);
+            $newCard = str_replace('Q', '8', $newCard);
+            $newCard = str_replace('Y', '9', $newCard);
+            return $newCard;
         }
     }
 }

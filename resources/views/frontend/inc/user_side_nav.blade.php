@@ -225,12 +225,20 @@
                     </li>
                 @endif
 
-
                 @if (\App\BusinessSetting::where('type', 'wallet_system')->first()->value == 1)
                     <li class="aiz-side-nav-item">
                         <a href="{{ route('wallet.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['wallet.index'])}}">
                             <i class="las la-dollar-sign aiz-side-nav-icon"></i>
                             <span class="aiz-side-nav-text">{{translate('My Wallet')}}</span>
+                        </a>
+                    </li>
+                @endif
+
+                @if(Auth::user()->user_type == 'seller')
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('wallet.subscription') }}" class="aiz-side-nav-link {{ areActiveRoutes(['wallet.subscription'])}}">
+                            <i class="las la-wallet aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">{{translate('Subscription')}}</span>
                         </a>
                     </li>
                 @endif
@@ -247,7 +255,7 @@
                 @if (\App\Addon::where('unique_identifier', 'affiliate_system')->first() != null && \App\Addon::where('unique_identifier', 'affiliate_system')->first()->activated && Auth::user()->affiliate_user != null && Auth::user()->affiliate_user->status)
                     <li class="aiz-side-nav-item">
                         <a href="{{ route('affiliate.user.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['affiliate.user.index', 'affiliate.payment_settings'])}}">
-                            <i class="las la-dollar-sign aiz-side-nav-icon"></i>
+                            <i class="las la-share aiz-side-nav-icon"></i>
                             <span class="aiz-side-nav-text">{{translate('Networking Associates')}}</span>
                         </a>
                     </li>
@@ -287,7 +295,7 @@
         @if (\App\BusinessSetting::where('type', 'vendor_system_activation')->first()->value == 1 && Auth::user()->user_type == 'customer')
             <div>
                 <a href="{{ route('shops.create') }}" class="btn btn-block btn-soft-primary rounded-0">
-                    </i>{{ translate('Be A Seller') }}
+                    </i>{{ translate('Be A Seller | Professional') }}
                 </a>
             </div>
         @endif

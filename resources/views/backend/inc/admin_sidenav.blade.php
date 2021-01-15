@@ -94,6 +94,11 @@
                                 </a>
                             </li>
                             <li class="aiz-side-nav-item">
+                                <a href="{{route('professional.index')}}" class="aiz-side-nav-link {{ areActiveRoutes(['professional.index']) }}">
+                                    <span class="aiz-side-nav-text">{{ translate('Professional Service') }}</span>
+                                </a>
+                            </li>
+                            <li class="aiz-side-nav-item">
                                 <a href="{{ route('product_bulk_upload.index') }}" class="aiz-side-nav-link" >
                                     <span class="aiz-side-nav-text">{{ translate('Bulk Import') }}</span>
                                 </a>
@@ -234,7 +239,7 @@
                     <li class="aiz-side-nav-item">
                         <a href="#" class="aiz-side-nav-link">
                             <i class="las la-user aiz-side-nav-icon"></i>
-                            <span class="aiz-side-nav-text">{{ translate('Sellers') }}</span>
+                            <span class="aiz-side-nav-text">{{ translate('Sellers / Services') }}</span>
                             <span class="aiz-side-nav-arrow"></span>
                         </a>
                         <ul class="aiz-side-nav-list level-2">
@@ -701,7 +706,7 @@
                     </li>
                 @endif
 
-                <li class="aiz-side-nav-item hide_super">
+                <li class="aiz-side-nav-item hide_super" style="display: none;">
                         <a href="#" class="aiz-side-nav-link">
                             <i class="las la-user-tie aiz-side-nav-icon"></i>
                             <span class="aiz-side-nav-text">{{translate('System')}}</span>
@@ -723,7 +728,7 @@
 
                 <!-- Addon Manager -->
                 @if(Auth::user()->user_type == 'admin' || in_array('21', json_decode(Auth::user()->staff->role->permissions)))
-                    <li class="aiz-side-nav-item hide_super">
+                    <li class="aiz-side-nav-item hide_super" style="display: none;">
                         <a href="{{route('addons.index')}}" class="aiz-side-nav-link {{ areActiveRoutes(['addons.index', 'addons.create'])}}">
                             <i class="las la-wrench aiz-side-nav-icon"></i>
                             <span class="aiz-side-nav-text">{{translate('Addon Manager')}}</span>

@@ -50,6 +50,7 @@ Route::group(['prefix' =>'admin', 'middleware' => ['auth', 'admin']], function()
 	Route::get('/sellers/destroy/{id}', 'SellerController@destroy')->name('sellers.destroy');
 	Route::get('/sellers/view/{id}/verification', 'SellerController@show_verification_request')->name('sellers.show_verification_request');
 	Route::get('/sellers/approve/{id}', 'SellerController@approve_seller')->name('sellers.approve');
+	Route::post('/sellers/approve_services', 'SellerController@approve_seller_service')->name('sellers.services.approved');
 	Route::get('/sellers/reject/{id}', 'SellerController@reject_seller')->name('sellers.reject');
 	Route::get('/sellers/login/{id}', 'SellerController@login')->name('sellers.login');
 	Route::post('/sellers/payment_modal', 'SellerController@payment_modal')->name('sellers.payment_modal');

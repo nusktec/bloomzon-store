@@ -6,9 +6,11 @@
 <!-- Top Bar -->
 <div class="top-navbar bg-white border-bottom border-soft-secondary z-1035">
     <div class="container">
+        @if(isMobile())
         <div style="cursor: pointer" class="row d-block d-sm-none" onclick="window.location.href='{{get_setting('banner_text')}}'">
             <img src="{{uploaded_asset(get_setting('banner_header'))}}" alt="top_banner" style="height: 20%; width: 100%;">
         </div>
+        @endif
         <div class="row">
             <div class="col-lg-7 col">
                 <ul class="list-inline d-flex justify-content-between justify-content-lg-start mb-0">

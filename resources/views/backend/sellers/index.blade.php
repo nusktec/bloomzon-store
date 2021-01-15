@@ -45,6 +45,7 @@
                 <th>{{translate('Email Address')}}</th>
                 <th>{{translate('Verification Info')}}</th>
                 <th>{{translate('Approval')}}</th>
+                <th>{{translate('Allow Service')}}</th>
                 <th>{{ translate('Num. of Products') }}</th>
                 <th>{{ translate('Due to seller') }}</th>
                 <th width="10%">{{translate('Options')}}</th>
@@ -68,6 +69,13 @@
                         <td>
                             <label class="aiz-switch aiz-switch-success mb-0">
                                 <input onchange="update_approved(this)" value="{{ $seller->id }}" type="checkbox" <?php if($seller->verification_status == 1) echo "checked";?> >
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="aiz-switch aiz-switch-success mb-0">
+                                <?php $ux = \App\User::find($seller->user_id)->first(); ?>
+                                <input onchange="update_approvedService(this)" value="<?php echo $ux->id; ?>" type="checkbox" <?php if($ux->is_professional) echo "checked";?> >
                                 <span class="slider round"></span>
                             </label>
                         </td>
@@ -226,6 +234,23 @@
             $.post('{{ route('sellers.approved') }}', {_token:'{{ csrf_token() }}', id:el.value, status:status}, function(data){
                 if(data == 1){
                     AIZ.plugins.notify('success', '{{ translate('Approved sellers updated successfully') }}');
+                }
+                else{
+                    AIZ.plugins.notify('danger', '{{ translate('Something went wrong') }}');
+                }
+            });
+        }
+
+        function update_approvedService(el){
+            if(el.checked){
+                var status = 1;
+            }
+            else{
+                var status = 0;
+            }
+            $.post('{{ route('sellers.services.approved') }}', {_token:'{{ csrf_token() }}', id:el.value, status:status}, function(data){
+                if(data){
+                    AIZ.plugins.notify('success', '{{ translate('Approved professional services updated successfully') }}');
                 }
                 else{
                     AIZ.plugins.notify('danger', '{{ translate('Something went wrong') }}');
