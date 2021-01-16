@@ -65,6 +65,7 @@ class DigitalProductController extends Controller
         $product->user_id = Auth::user()->id;
         $product->category_id = $request->category_id;
         $product->digital = 1;
+        $product->is_service = isset($request->service)?1:0;
         $product->photos = $request->photos;
         $product->thumbnail_img = $request->thumbnail_img;
 

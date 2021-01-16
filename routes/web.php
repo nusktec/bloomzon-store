@@ -204,6 +204,17 @@ Route::group(['prefix' => 'seller', 'middleware' => ['seller', 'verified', 'user
     Route::get('/digitalproducts/{id}/edit', 'HomeController@show_digital_product_edit_form')->name('seller.digitalproducts.edit');
 });
 
+////PROFESSIONAL SERVICES//////////
+//////////////////////////////////
+Route::group(['prefix' => 'professional-service', 'middleware' => ['seller', 'verified', 'user']], function () {
+    //professional Services
+    Route::get('/services', 'HomeController@professional_service_list')->name('professional_service.services');
+    Route::get('/services/upload', 'HomeController@show_professional_service_upload_form')->name('professional_service.services.upload');
+    Route::get('/services/{id}/edit', 'HomeController@show_professional_service_edit_form')->name('professional_service.services.edit');
+});
+////////////////////////
+///////////////////////
+
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/products/store/', 'ProductController@store')->name('products.store');
     Route::post('/products/update/{id}', 'ProductController@update')->name('products.update');

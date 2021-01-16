@@ -113,9 +113,9 @@
     <div class="aiz-main-wrapper d-flex flex-column">
         <!-- Header -->
         @include('frontend.inc.nav')
-
+    <div class="mt-b5" >
         @yield('content')
-
+    </div>
         @include('frontend.inc.footer')
 
     </div>

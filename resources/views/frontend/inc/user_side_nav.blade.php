@@ -94,7 +94,7 @@
                     </a>
                 </li>
 
-                @if(Auth::user()->user_type == 'seller')
+                @if(Auth::user()->user_type == 'seller' && Auth::user()->is_professional == 0)
                     <li class="aiz-side-nav-item">
                         <a href="{{ route('seller.products') }}" class="aiz-side-nav-link {{ areActiveRoutes(['seller.products', 'seller.products.upload', 'seller.products.edit'])}}">
                             <i class="lab la-sketch aiz-side-nav-icon"></i>
@@ -113,6 +113,27 @@
                             <span class="aiz-side-nav-text">{{ translate('Digital Products') }}</span>
                         </a>
                     </li>
+                @endif
+                @if(Auth::user()->user_type == 'seller' && Auth::user()->is_professional == 1)
+
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('professional_service.services') }}" class="aiz-side-nav-link {{ areActiveRoutes(['seller.products', 'seller.products.upload', 'seller.products.edit'])}}">
+                            <i class="lab la-sketch aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">{{ translate('Services') }}</span>
+                        </a>
+                    </li>
+                    {{-- <li class="aiz-side-nav-item">
+                        <a href="{{route('service_bulk_upload.index')}}" class="aiz-side-nav-link {{ areActiveRoutes(['service_bulk_upload.index'])}}">
+                            <i class="las la-upload aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">{{ translate('Service Bulk Upload') }}</span>
+                        </a>
+                    </li> --}}
+                    {{-- <li class="aiz-side-nav-item">
+                        <a href="{{ route('professional_service.services') }}" class="aiz-side-nav-link {{ areActiveRoutes(['seller.digitalproducts', 'seller.digitalproducts.upload', 'seller.digitalproducts.edit'])}}">
+                            <i class="lab la-sketch aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">{{ translate('Digital Products') }}</span>
+                        </a>
+                    </li> --}}
                 @endif
 
                 @if(\App\BusinessSetting::where('type', 'classified_product')->first()->value == 1)
@@ -179,13 +200,14 @@
                                     ->distinct()
                                     ->count();
                     @endphp
-                    <li class="aiz-side-nav-item">
-                        <a href="{{ route('reviews.seller') }}" class="aiz-side-nav-link {{ areActiveRoutes(['reviews.seller'])}}">
-                            <i class="las la-star-of-david aiz-side-nav-icon"></i>
-                            <span class="aiz-side-nav-text">{{ translate('Product Reviews') }}</span>
-                            @if($review_count > 0)<span class="badge badge-inline badge-success">{{ $review_count }}</span>@endif
-                        </a>
-                    </li>
+
+                        <li class="aiz-side-nav-item">
+                            <a href="{{ route('reviews.seller') }}" class="aiz-side-nav-link {{ areActiveRoutes(['reviews.seller'])}}">
+                                <i class="las la-star-of-david aiz-side-nav-icon"></i>
+                                <span class="aiz-side-nav-text">{{ Auth::user()->is_professional? translate('Service Review') : translate('Product Reviews') }}</span>
+                                @if($review_count > 0)<span class="badge badge-inline badge-success">{{ $review_count }}</span>@endif
+                            </a>
+                        </li>
 
                     <li class="aiz-side-nav-item hide_xm">
                         <a href="{{ route('shops.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['shops.index'])}}">

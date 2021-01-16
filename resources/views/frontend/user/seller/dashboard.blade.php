@@ -21,7 +21,7 @@
                             <div class="h3 fw-700">
                               {{ count(\App\Product::where('user_id', Auth::user()->id)->get()) }}
                             </div>
-                            <div class="opacity-50">{{ translate('Products')}}</div>
+                              <div class="opacity-50">{{ Auth::user()->is_professional? translate('Services'): translate('Products')}}</div>
                           </div>
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                               <path fill="rgba(255,255,255,0.3)" fill-opacity="1" d="M0,192L26.7,192C53.3,192,107,192,160,202.7C213.3,213,267,235,320,218.7C373.3,203,427,149,480,117.3C533.3,85,587,75,640,90.7C693.3,107,747,149,800,149.3C853.3,149,907,107,960,112C1013.3,117,1067,171,1120,202.7C1173.3,235,1227,245,1280,213.3C1333.3,181,1387,107,1413,69.3L1440,32L1440,320L1413.3,320C1386.7,320,1333,320,1280,320C1226.7,320,1173,320,1120,320C1066.7,320,1013,320,960,320C906.7,320,853,320,800,320C746.7,320,693,320,640,320C586.7,320,533,320,480,320C426.7,320,373,320,320,320C266.7,320,213,320,160,320C106.7,320,53,320,27,320L0,320Z"></path>
@@ -35,7 +35,7 @@
                                 <div class="h3 fw-700">
                                   {{ count(\App\OrderDetail::where('seller_id', Auth::user()->id)->where('delivery_status', 'delivered')->get()) }}
                                 </div>
-                                <div class="opacity-50">{{ translate('Total sale')}}</div>
+                                <div class="opacity-50">{{Auth::user()->is_professional?translate('Total services') : translate('Total sale')}}</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                                 <path fill="rgba(255,255,255,0.3)" fill-opacity="1" d="M0,192L30,208C60,224,120,256,180,245.3C240,235,300,181,360,144C420,107,480,85,540,96C600,107,660,149,720,154.7C780,160,840,128,900,117.3C960,107,1020,117,1080,112C1140,107,1200,85,1260,74.7C1320,64,1380,64,1410,64L1440,64L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
@@ -77,7 +77,7 @@
                               <div class="h3 fw-700">
                                   {{ count(\App\OrderDetail::where('seller_id', Auth::user()->id)->where('delivery_status', 'delivered')->get()) }}
                               </div>
-                              <div class="opacity-50">{{ translate('Successful orders')}}</div>
+                              <div class="opacity-50">{{ Auth::user()->is_professional?translate('Successful requests'): translate('Successful orders')}}</div>
                           </div>
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                               <path fill="rgba(255,255,255,0.3)" fill-opacity="1" d="M0,192L26.7,192C53.3,192,107,192,160,202.7C213.3,213,267,235,320,218.7C373.3,203,427,149,480,117.3C533.3,85,587,75,640,90.7C693.3,107,747,149,800,149.3C853.3,149,907,107,960,112C1013.3,117,1067,171,1120,202.7C1173.3,235,1227,245,1280,213.3C1333.3,181,1387,107,1413,69.3L1440,32L1440,320L1413.3,320C1386.7,320,1333,320,1280,320C1226.7,320,1173,320,1120,320C1066.7,320,1013,320,960,320C906.7,320,853,320,800,320C746.7,320,693,320,640,320C586.7,320,533,320,480,320C426.7,320,373,320,320,320C266.7,320,213,320,160,320C106.7,320,53,320,27,320L0,320Z"></path>
@@ -90,24 +90,24 @@
                       <div class="col-md-7">
                           <div class="card">
                               <div class="card-header">
-                                  <h5 class="mb-0 h6">{{ translate('Orders') }}</h5>
+                                  <h5 class="mb-0 h6">{{Auth::user()->is_professional? translate('Service requests'): translate('Orders') }}</h5>
                               </div>
                               <div class="card-body">
                                   <table class="table aiz-table mb-0">
                                       <tr>
-                                          <td>{{ translate('Total orders')}}:</td>
+                                          <td>{{ Auth::user()->is_professional?translate('Total request') : translate('Total orders')}}:</td>
                                           <td>{{ count(\App\OrderDetail::where('seller_id', Auth::user()->id)->get()) }}</strong></td>
                                       </tr>
                                       <tr>
-                                          <td>{{ translate('Pending orders')}}:</td>
+                                          <td>{{Auth::user()->is_professional? translate('Pending request') : translate('Pending orders')}}:</td>
                                           <td>{{ count(\App\OrderDetail::where('seller_id', Auth::user()->id)->where('delivery_status', 'pending')->get()) }}</strong></td>
                                       </tr>
                                       <tr>
-                                          <td>{{ translate('Cancelled orders')}}:</td>
+                                          <td>{{ Auth::user()->is_professional?translate('Canceled request') : translate('Cancelled orders')}}:</td>
                                           <td>{{ count(\App\OrderDetail::where('seller_id', Auth::user()->id)->where('delivery_status', 'cancelled')->get()) }}</strong></td>
                                       </tr>
                                       <tr>
-                                          <td>{{ translate('Successful orders')}}:</td>
+                                          <td>{{ Auth::user()->is_professional?translate('Successful request') : translate('Successful orders')}}:</td>
                                           <td>{{ count(\App\OrderDetail::where('seller_id', Auth::user()->id)->where('delivery_status', 'delivered')->get()) }}</strong></td>
                                       </tr>
                                   </table>
@@ -134,14 +134,14 @@
                       <div class="col-md-8">
                           <div class="card">
                               <div class="card-header">
-                                  <h6 class="mb-0">{{ translate('Products') }}</h6>
+                                  <h6 class="mb-0">{{ Auth::user()->is_professional?translate('Services'):translate('Products') }}</h6>
                               </div>
             				          <div class="card-body">
                                 <table class="table aiz-table mb-0">
                                   <thead>
                                       <tr>
                                           <th>{{ translate('Category')}}</th>
-                                          <th>{{ translate('Product')}}</th>
+                                          <th>{{ Auth::user()->is_professional?translate('Service'): translate('Product')}}</th>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -156,8 +156,7 @@
                                 </table>
                                 <br>
                                 <div class="text-center">
-                                    <a href="{{ route('seller.products.upload')}}" class="btn btn-primary d-inline-block">{{ translate('Add New Product')}}</a>
-                                </div>
+                                    <a href="{{ Auth::user()->is_professional?route('professional_service.services.upload') : route('seller.products.upload')}}" class="btn btn-primary d-inline-block">{{Auth::user()->is_professional?translate('Add New Service') : translate('Add New Product')}}</a>  </div>
                               </div>
                           </div>
                       </div>

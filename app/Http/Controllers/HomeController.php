@@ -724,6 +724,37 @@ class HomeController extends Controller
         return view('frontend.user.seller.digitalproducts.product_edit', compact('categories', 'product', 'lang'));
     }
 
+    public function professional_service_list(Request $request)
+    {
+        $products = Product::where('user_id', Auth::user()->id)->where('digital', 1)->where('is_service',1)->orderBy('created_at', 'desc')->paginate(10);
+        return view('frontend.user.seller.professional_services.services', compact('products'));
+    }
+    public function show_professional_service_upload_form(Request $request)
+    {
+        if(\App\Addon::where('unique_identifier', 'seller_subscription')->first() != null && \App\Addon::where('unique_identifier', 'seller_subscription')->first()->activated){
+            if(Auth::user()->seller->remaining_digital_uploads > 0){
+                $business_settings = BusinessSetting::where('type', 'digital_product_upload')->first();
+                $categories = Category::where('digital', 1)->get();
+                return view('frontend.user.seller.professional_services.service_upload', compact('categories'));
+            }
+            else {
+                flash(translate('Upload limit has been reached. Please upgrade your package.'))->warning();
+                return back();
+            }
+        }
+
+        $business_settings = BusinessSetting::where('type', 'digital_product_upload')->first();
+        $categories = Category::where('digital', 1)->get();
+        return view('frontend.user.seller.professional_services.service_upload', compact('categories'));
+    }
+
+    public function show_professional_service_edit_form(Request $request, $id)
+    {
+        $categories = Category::where('digital', 1)->get();
+        $lang = $request->lang;
+        $product = Product::find($id);
+        return view('frontend.user.seller.professional_services.service_edit', compact('categories', 'product', 'lang'));
+    }
     // Ajax call
     public function new_verify(Request $request)
     {
