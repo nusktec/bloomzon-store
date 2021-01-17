@@ -96,7 +96,7 @@
                                     @endif
                                 </div>
                                 <div class="text-center">
-                                    <p class="text-muted mb-0">{{ translate('Dont have an account?')}}</p>
+                                    <p class="text-muted mb-0">{{ translate('Don\'t have an account?')}}</p>
                                     <a href="{{ route('user.registration') }}">{{ translate('Register Now')}}</a>
                                 </div>
                             </div>
@@ -105,19 +105,9 @@
                 </div>
             </div>
         </div>
-        </div>
     </section>
 @endsection
 
 @section('script')
-    <script type="text/javascript">
-        function autoFillSeller() {
-            $('#email').val('seller@example.com');
-            $('#password').val('123456');
-        }
-        function autoFillCustomer() {
-            $('#email').val('customer@example.com');
-            $('#password').val('123456');
-        }
-    </script>
+
 @endsection

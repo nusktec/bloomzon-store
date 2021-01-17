@@ -17,7 +17,7 @@
 <!-- Top Bar -->
 <div class="top-navbar bg-white border-bottom border-soft-secondary z-1035">
     {{--@if(isMobile())--}}
-    <div style="cursor: pointer; background-image: url({{uploaded_asset(get_setting('banner_header'))}}); width:100%; height:80px;" onclick="window.location.href='{{get_setting('banner_text')}}'">
+    <div style="cursor: pointer; background-image: url({{uploaded_asset(get_setting('banner_header'))}}); background-repeat: repeat; width:100%; height:80px;" onclick="window.location.href='{{get_setting('banner_text')}}'">
         {{--<img src="{{''}}" style="width:100%; height:80px; background-repeat: repeat;" alt="top_banner">--}}
     </div>
     {{--@endif--}}

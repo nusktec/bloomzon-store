@@ -1,56 +1,11 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-    <section class="gry-bg py-5 ">
+    <section class="gry-bg py-2">
+        <div class="profile">
             <div class="container">
                 <div class="row">
-                    <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-8 m-auto">
-                        <ul class="list-block justify-content-between justify-content-lg-start mx-auto">
-                            <li class="list-group-item">
-                                <a href="{{route('home')}}">
-                                    <i class="la la-home la-2x"></i>
-                                    <strong> Home </strong>
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{route('user.login')}}">
-                                    <i class="la la-user-lock la-2x"></i>
-                                    <strong>Login</strong>
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-
-                                <a href="{{route('user.registration')}}">
-                                    <i class="la la-user-plus la-2x"></i>
-                                    <strong>Register</strong>
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-
-                                <a href="{{ route('terms') }}">
-                                    <i class="la la-file-text text-primary la-2x mb-2"></i>
-                                    <strong>{{ translate('Terms') }}</strong>
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('returnpolicy') }}">
-                                    <i class="la la-mail-reply la-2x text-primary mb-2"></i>
-                                    <strong>{{ translate('Return Policy') }}</strong>
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('supportpolicy') }}">
-                                    <i class="la la-support la-2x text-primary mb-2"></i>
-                                    <strong>{{ translate('Support Policy') }}</strong>
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a  href="{{ route('privacypolicy') }}">
-                                    <i class="las la-exclamation-circle la-2x text-primary mb-2"></i>
-                                    <strong>{{ translate('Privacy Policy') }}</strong>
-                                </a>
-                            </li>
-                            <hr>
+                        <ul class="col-12">
                             <li class="list-group-item">
                                 <ul class="list-inline d-flex justify-content-between justify-content-lg-start mb-0">
                                     @if(get_setting('show_language_switcher') == 'on')
@@ -119,11 +74,59 @@
                                 </ul>
                             </li>
 
+                            <li class="list-group-item">
+                                <a href="{{route('home')}}">
+                                    <i class="la la-home la-1x"></i>
+                                    <span> Home </span>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{route('user.login')}}">
+                                    <i class="la la-user-lock la-1x"></i>
+                                    <strong>Login</strong>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+
+                                <a href="{{route('user.registration')}}">
+                                    <i class="la la-user-plus la-1x"></i>
+                                    <span>Register</span>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+
+                                <a href="{{ route('terms') }}">
+                                    <i class="la la-file-text text-primary la-1x"></i>
+                                    <span>{{ translate('Terms') }}</span>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('returnpolicy') }}">
+                                    <i class="la la-mail-reply la-1x text-primary"></i>
+                                    <span>{{ translate('Return Policy') }}</span>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('supportpolicy') }}">
+                                    <i class="la la-support la-1x text-primary"></i>
+                                    <span>{{ translate('Support Policy') }}</span>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('privacypolicy') }}">
+                                    <i class="las la-exclamation-circle la-1x text-primary"></i>
+                                    <span>{{ translate('Privacy Policy') }}</span>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('privacypolicy') }}">
+                                    <i class="las la-exclamation-circle la-1x text-primary"></i>
+                                    <span>{{ translate('Country Policy') }}</span>
+                                </a>
+                            </li>
                         </ul>
-                    </div>
                 </div>
             </div>
-
         </div>
     </section>
 @endsection
