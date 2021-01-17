@@ -3,8 +3,27 @@
 @section('content')
 <section class="py-5">
     <div class="container">
-        <div class="d-flex align-items-start">
-            @include('frontend.inc.user_side_nav')
+
+
+            @if (Auth::user()->user_type == 'seller' && !Auth::user()->seller)
+                <div class="text-center w-25 m-auto">
+                    <a href="{{ route('shops.create') }}" class="btn btn-block btn-soft-primary rounded-0">
+                        </i>{{ translate('Complete your Profile') }}
+                    </a>
+                    <h6>
+                    <p>Please add shop details to complete your profile</p>
+                    </h6>
+                </div>
+
+            @elseif(Auth::user()->user_type == 'networking_agent' && !Auth::user()->affiliate)
+                <div>
+                    <a href="{{ route('shops.create') }}" class="btn btn-block btn-soft-primary rounded-0">
+                        </i>{{ translate('Complete your Profile') }}
+                    </a>
+                </div>
+            @else
+            <div class="d-flex align-items-start">
+                @include('frontend.inc.user_side_nav')
             <div class="aiz-user-panel">
                 <div class="aiz-titlebar mt-2 mb-4">
                     <div class="row align-items-center">
@@ -200,6 +219,7 @@
                   </div>
 
               </div>
+            @endif
         </div>
     </div>
 </section>

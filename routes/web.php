@@ -76,6 +76,12 @@ Route::get('/customer-product/{slug}', 'CustomerProductController@customer_produ
 Route::get('/customer-packages', 'HomeController@premium_package_index')->name('customer_packages_list_show');
 
 Route::get('/search', 'HomeController@search')->name('search');
+Route::get('/navigations', function(){
+    return view('frontend.user_mobile_nav');
+})->name('mobile.navigation');
+Route::get('/coming-soon', function(){
+    return view('frontend.coming_soon');
+})->name('coming_soon');
 Route::get('/search?q={search}', 'HomeController@search')->name('suggestion.search');
 Route::post('/ajax-search', 'HomeController@ajax_search')->name('search.ajax');
 

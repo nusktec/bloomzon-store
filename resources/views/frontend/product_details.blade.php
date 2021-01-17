@@ -125,7 +125,7 @@
                                 </div>
                                 @if (\App\BusinessSetting::where('type', 'conversation_system')->first()->value == 1)
                                     <div class="col-auto">
-                                        <button class="btn btn-sm btn-soft-primary" onclick="show_chat_modal()">{{ translate('Message Seller')}}</button>
+                                        <button style="background-color: #1b45c5; border-width: 0;" class="btn btn-sm btn-secondary" onclick="show_chat_modal()">{{ translate('Message Seller')}}</button>
                                     </div>
                                 @endif
 
@@ -273,7 +273,7 @@
                                                 <button class="btn col-auto btn-icon btn-sm btn-circle btn-light" type="button" data-type="minus" data-field="quantity" disabled="">
                                                     <i class="las la-minus"></i>
                                                 </button>
-                                                <input type="text" name="quantity" class="col border-0 text-center flex-grow-1 fs-16 input-number" placeholder="1" value="{{ $detailedProduct->min_qty }}" min="{{ $detailedProduct->min_qty }}" max="10" readonly>
+                                                <input type="number" name="quantity" class="col border-0 text-center flex-grow-1 fs-16 input-number" placeholder="1" value="{{ $detailedProduct->min_qty }}" min="{{ $detailedProduct->min_qty }}" max="10">
                                                 <button class="btn  col-auto btn-icon btn-sm btn-circle btn-light" type="button" data-type="plus" data-field="quantity">
                                                     <i class="las la-plus"></i>
                                                 </button>

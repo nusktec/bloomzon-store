@@ -16,15 +16,32 @@
                                 <div class="">
                                     <form id="reg-form" class="form-default" role="form" action="{{ route('register') }}" method="POST">
                                         @csrf
+
                                         <div class="form-group">
-                                            <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" placeholder="{{  translate('Full Name') }}" name="name">
-                                            @if ($errors->has('name'))
+                                            <input type="text" class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}" value="{{ old('firstname') }}" placeholder="{{  translate('First Name') }}" name="firstname">
+                                            @if ($errors->has('firstname'))
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                    <strong>{{ $errors->first('firstname') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
 
+                                        <div class="form-group">
+                                            <input type="text" class="form-control {{ $errors->has('lastname') ? ' is-invalid' : '' }}" value="{{ old('lastname') }}" placeholder="{{  translate('Last Name') }}" name="lastname">
+                                            @if ($errors->has('lastname'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('lastname') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control {{ $errors->has('middlename') ? ' is-invalid' : '' }}" value="{{ old('middlename') }}" placeholder="{{  translate('Middle Name') }}" name="middlename">
+                                            @if ($errors->has('middlename'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('middlename') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
                                         @if (\App\Addon::where('unique_identifier', 'otp_system')->first() != null && \App\Addon::where('unique_identifier', 'otp_system')->first()->activated)
                                             <div class="form-group phone-form-group mb-1">
                                                 <input type="tel" id="phone-code" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" value="{{ old('phone') }}" placeholder="" name="phone" autocomplete="off">
@@ -40,7 +57,6 @@
                                                     </span>
                                                 @endif
                                             </div>
-
                                             <div class="form-group text-right">
                                                 <button class="btn btn-link p-0 opacity-50 text-reset" type="button" onclick="toggleEmailPhone(this)">{{ translate('Use Email Instead') }}</button>
                                             </div>
@@ -55,6 +71,20 @@
                                             </div>
                                         @endif
 
+                                        <div class="form-group">
+                                            <select onchange="userTypeChanged(this)" class="form-control {{ $errors->has('account_type') ? ' is-invalid' : '' }}" value="{{ old('account_type') }}" placeholder="{{  translate('Register as') }}" id="account_type" name="account_type">
+                                                <option>Select account type</option>
+                                                <option value="buyer">Buyer</option>
+                                                <option value="seller">Seller</option>
+                                                <option value="professional_service">Professional Service</option>
+                                                <option value="networking_associate" >Networking Agent</option>
+                                            </select>
+                                            @if ($errors->has('account_type'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('account_type') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{  translate('Password') }}" name="password">
                                             @if ($errors->has('password'))
@@ -134,7 +164,14 @@
     @if(\App\BusinessSetting::where('type', 'google_recaptcha')->first()->value == 1)
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     @endif
-
+    <script>
+        function userTypeChanged(el){
+            var userType = el.value;
+            if(userType == 'networking_associate'){
+                window.location.href = "{{route('affiliate.apply')}}"
+            }
+        }
+    </script>
     <script type="text/javascript">
 
         @if(\App\BusinessSetting::where('type', 'google_recaptcha')->first()->value == 1)

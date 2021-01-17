@@ -15,6 +15,14 @@
         </a>
     </div>
     <div class="aiz-user-sidenav rounded overflow-hidden  c-scrollbar-light">
+{{--//check if seller's profile and shop is  completed--}}
+        @if (Auth::user()->user_type == 'seller' && !Auth::user()->seller)
+            <div>
+                <a href="{{ route('shops.create') }}" class="btn btn-block btn-soft-primary rounded-0">
+                    </i>{{ translate('Complete your Profile') }}
+                </a>
+            </div>
+        @else
         <div class="px-4 text-center mb-4">
             <span class="avatar avatar-md mb-3">
                 @if (Auth::user()->avatar_original != null)
@@ -384,6 +392,6 @@
             </table>
         </div>
         @endif
-
+    @endif
     </div>
 </div>

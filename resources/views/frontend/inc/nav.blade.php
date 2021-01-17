@@ -2,17 +2,28 @@
     .header_color {
         background-image: linear-gradient(var(--primary), #b02304);
     }
+    .menu_text{
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+    }
+    div::-webkit-scrollbar {
+        height: 5px;
+    }
+    div::-webkit-scrollbar-track {
+        border-radius: 2px;
+    }
 </style>
 <!-- Top Bar -->
 <div class="top-navbar bg-white border-bottom border-soft-secondary z-1035">
+    {{--@if(isMobile())--}}
+    <div style="cursor: pointer; background-image: url({{uploaded_asset(get_setting('banner_header'))}}); width:100%; height:80px;" onclick="window.location.href='{{get_setting('banner_text')}}'">
+        {{--<img src="{{''}}" style="width:100%; height:80px; background-repeat: repeat;" alt="top_banner">--}}
+    </div>
+    {{--@endif--}}
     <div class="container">
-        @if(isMobile())
-        <div style="cursor: pointer" class="row d-block d-sm-none" onclick="window.location.href='{{get_setting('banner_text')}}'">
-            <img src="{{uploaded_asset(get_setting('banner_header'))}}" alt="top_banner" style="height: 20%; width: 100%;">
-        </div>
-        @endif
-        <div class="row">
-            <div class="col-lg-7 col">
+        <div class="row border-bottom">
+            <div class="col-lg-7 col d-sm-block d-none">
                 <ul class="list-inline d-flex justify-content-between justify-content-lg-start mb-0">
                     @if(get_setting('show_language_switcher') == 'on')
                         <li class="list-inline-item dropdown mr-3" id="lang-change">
@@ -89,6 +100,65 @@
                             <a href="{{ route('user.registration') }}" class="text-reset py-2 d-inline-block opacity-60">{{ translate('Registration')}}</a>
                         </li>
                         @endauth
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-2 p-2">
+            <div class="col" style="overflow-x: scroll; overflow-y: hidden; scrollbar-width: 2;">
+                <ul class="list-inline d-flex justify-content-lg-start mb-0">
+                        <li class="list-inline-item mr-3">
+                            <a href="{{route('home')}}" class="text-reset py-2" data-display="static">
+                                <i class="la la-home"></i>
+                                <span class="opacity-100 menu_text">Home</span>
+                            </a>
+                        </li>
+
+                        <li class="list-inline-item mr-3">
+                            <a href="{{route('coming_soon')}}" class="text-reset py-2" data-display="static">
+                                <i class="la la-plane"></i>
+                                <span class="opacity-100 menu_text">Bloomzon Travel</span>
+                            </a>
+                        </li>
+                    <li class="list-inline-item mr-3">
+                        <a href="{{route('coming_soon')}}" class="text-reset py-2" data-display="static">
+                            <i class="la la-home"></i>
+                            <span class="opacity-100 menu_text">Real Estate</span>
+                        </a>
+                    </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="{{route('coming_soon')}}" class="text-reset py-2" data-display="static">
+                                <i class="la  la-cutlery"></i>
+                                <span class="opacity-100 menu_text">Food & Groceries</span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="{{route('coming_soon')}}" class="text-reset py-2" data-display="static">
+                                <i class="la  la-car"></i>
+                                <span class="opacity-100 menu_text">Delivery Agent</span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="{{route('orders.track')}}" class="text-reset py-2" data-display="static">
+                                <i class="la la-shipping-fast"></i>
+                                <span class="opacity-100 menu_text">Track Order</span>
+                            </a>
+                        </li>
+                    {{--//travel agent--}}
+                    {{--//--}}
+                        <li class="list-inline-item dropdown" id="currency-change">
+
+                            {{--<a href="javascript:void(0)" class="dropdown-toggle text-reset py-2 opacity-60" data-toggle="dropdown" data-display="static">--}}
+                                {{--{{ \App\Currency::where('code', $currency_code)->first()->name }} {{ (\App\Currency::where('code', $currency_code)->first()->symbol) }}--}}
+                            {{--</a>--}}
+                            {{--<ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">--}}
+                                {{--@foreach (\App\Currency::where('status', 1)->get() as $key => $currency)--}}
+                                    {{--<li>--}}
+                                        {{--<a class="dropdown-item @if($currency_code == $currency->code) active @endif" href="javascript:void(0)" data-currency="{{ $currency->code }}">{{ $currency->name }} ({{ $currency->symbol }})</a>--}}
+                                    {{--</li>--}}
+                                {{--@endforeach--}}
+                            {{--</ul>--}}
+                        </li>
+
                 </ul>
             </div>
         </div>

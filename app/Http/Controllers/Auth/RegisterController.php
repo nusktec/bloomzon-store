@@ -58,11 +58,29 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'middlename' => 'required|string|max:255',
+            'account_type' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
+
+    public function saveUserType($account_type, $user){
+        if($account_type == 'buyer'){
+            $customer = new Customer;
+            $customer->user_id = $user->id;
+            $customer->save();
+        }elseif($account_type == 'networking_agent'){
+            $user->user_type = 'affiliate';
+            $user->save();
+        }elseif($account_type == 'seller' || $account_type == 'professional_service') {
+            $user->user_type = 'seller';
+            $user->is_professional = $account_type == 'professional_service' ? 1 : 0;//check if professional service
+            $user->save();
+        }
+    }
     /**
      * Create a new user instance after a valid registration.
      *
@@ -71,29 +89,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $name = $data['firstname'].' '. $data['middlename'] . ' '. $data['lastname'];
+        $account_type = $data['account_type'];
+
         if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $user = User::create([
-                'name' => $data['name'],
+                'name' => $name,
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
             ]);
-
-            $customer = new Customer;
-            $customer->user_id = $user->id;
-            $customer->save();
+            $this->saveUserType($account_type, $user);
         }
         else {
             if (\App\Addon::where('unique_identifier', 'otp_system')->first() != null && \App\Addon::where('unique_identifier', 'otp_system')->first()->activated){
                 $user = User::create([
-                    'name' => $data['name'],
+                    'name' => $name,
                     'phone' => '+'.$data['country_code'].$data['phone'],
                     'password' => Hash::make($data['password']),
                     'verification_code' => rand(100000, 999999)
                 ]);
 
-                $customer = new Customer;
-                $customer->user_id = $user->id;
-                $customer->save();
+                $this->saveUserType($account_type, $user);
 
                 $otpController = new OTPVerificationController;
                 $otpController->send_code($user);
