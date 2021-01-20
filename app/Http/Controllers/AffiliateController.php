@@ -97,6 +97,7 @@ class AffiliateController extends Controller
     }
 
     public function store_affiliate_user(Request $request){
+
         if(!Auth::check()){
             if(User::where('email', $request->email)->first() != null){
                 flash(translate('Email already exists!'))->error();
@@ -129,6 +130,7 @@ class AffiliateController extends Controller
                 return back();
             }
         }
+
 
         $affiliate_user = Auth::user()->affiliate_user;
         if ($affiliate_user == null) {

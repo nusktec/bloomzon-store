@@ -134,15 +134,15 @@
                         <li class="list-inline-item mr-3">
                             <a href="{{route('coming_soon')}}" class="text-reset py-2" data-display="static">
                                 <i class="la  la-car"></i>
-                                <span class="opacity-100 menu_text">Delivery Agent</span>
+                                <span class="opacity-100 menu_text">Professional Service</span>
                             </a>
                         </li>
-                        <li class="list-inline-item mr-3">
-                            <a href="{{route('orders.track')}}" class="text-reset py-2" data-display="static">
-                                <i class="la la-shipping-fast"></i>
-                                <span class="opacity-100 menu_text">Track Order</span>
-                            </a>
-                        </li>
+                    <li class="list-inline-item mr-3">
+                        <a href="{{route('orders.track')}}" class="text-reset py-2" data-display="static">
+                            <i class="la la-shipping-fast"></i>
+                            <span class="opacity-100 menu_text">Track Order</span>
+                        </a>
+                    </li>
                     {{--//travel agent--}}
                     {{--//--}}
                         <li class="list-inline-item dropdown" id="currency-change">

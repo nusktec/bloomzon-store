@@ -84,6 +84,7 @@
 
                                 <tbody>
                                     @foreach ($products as $key => $product)
+                                        @if(!$product->is_service):
                                         <tr>
                                             <td>{{ $key+1 }}</td>
                                             <td><a href="{{ route('product', $product->slug) }}" target="_blank">{{   $product->getTranslation('name')  }}</a></td>
@@ -113,6 +114,7 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>

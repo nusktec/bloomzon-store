@@ -53,9 +53,9 @@
                                 <i class="las la-credit-card la-2x text-white"></i>
                             </span>
                               <div class="px-3 pt-3 pb-3">
-                                  <?php $card = \App\Cards::where('user_id', Auth::user()->id)->first(); ?>
-                                  <div class="h6 fw-700 text-center"><?php echo substr(encryptCard($card->cnumber, true), 0,4)."-XXXX-XXXX-".substr(encryptCard($card->cnumber, true), 13,16); ?></div>
-                                  <div class="opacity-50 text-center">{{ translate('Added Card') }}</div>
+                                  <?php $card = \App\Cards::where('user_id', Auth::user()->id)->first();?>
+                                  <div class="h6 fw-700 text-center"><?php echo substr(encryptCard((is_object($card)?$card->cnumber:'XXXX'), true), 0,4)."-XXXX-XXXX-".substr(encryptCard((is_object($card)?$card->cnumber:'XXXX'), true), 13,16); ?></div>
+                                  <div class="opacity-50 text-center">{{ translate((is_object($card)?'Added Card':'No Card Link')) }}</div>
                               </div>
                           </div>
                       </div>
